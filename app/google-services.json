@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "617288594084",
+    "firebase_url": "https://blackcurrencymarket.firebaseio.com",
+    "project_id": "blackcurrencymarket",
+    "storage_bucket": "blackcurrencymarket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617288594084:android:415efeb8f31088cd946c31",
+        "android_client_info": {
+          "package_name": "com.artimanton.blackcurrencymarket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617288594084-0b7clshahr09iv8j9t1onlvlm67luvct.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.artimanton.blackcurrencymarket",
+            "certificate_hash": "0c4ad327400a2491529bec67a50e32f4de32c075"
+          }
+        },
+        {
+          "client_id": "617288594084-5jsuic58ok1puoq2stq1i19esd6vaemo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBytXm4qEQEZG-XH3ky0-dFSEa2r0ZSRDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617288594084-5jsuic58ok1puoq2stq1i19esd6vaemo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
