@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">BlackCurrencyMarket</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="facebook_application_id">2535574336678330</string>
 </resources>
