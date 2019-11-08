@@ -50,13 +50,14 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
+                
             }
         });
         //Init providers
         providers = Arrays.asList(
                 new AuthUI.IdpConfig.EmailBuilder().build(),
                 new AuthUI.IdpConfig.PhoneBuilder().build(),
-               // new AuthUI.IdpConfig.FacebookBuilder().build(),
+                new AuthUI.IdpConfig.FacebookBuilder().build(),
                 new AuthUI.IdpConfig.GoogleBuilder().build()
         );
         showSingInOptions();
