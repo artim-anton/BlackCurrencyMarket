@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "617288594084-cobn66s6ns7gc3k8bs1j1hdqaqrah7ir.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.artimanton.blackcurrencymarket",
+            "certificate_hash": "8f7705838204cb4ae5db8af45ebe376c3744d19c"
+          }
+        },
+        {
           "client_id": "617288594084-0b7clshahr09iv8j9t1onlvlm67luvct.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

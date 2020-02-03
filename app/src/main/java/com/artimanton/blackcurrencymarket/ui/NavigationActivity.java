@@ -3,6 +3,7 @@ package com.artimanton.blackcurrencymarket.ui;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TabHost;
 
 import com.artimanton.blackcurrencymarket.R;
@@ -31,5 +32,10 @@ public class NavigationActivity extends TabActivity {
         tabSpec.setIndicator("Евро");
         tabSpec.setContent(new Intent(this, EuroActivity.class));
         tabHost.addTab(tabSpec);
+    }
+
+    public void addBtnNavigation(View view) {
+        Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
+        startActivity(intent);
     }
 }
