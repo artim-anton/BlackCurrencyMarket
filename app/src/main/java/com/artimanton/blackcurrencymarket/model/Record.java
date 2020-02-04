@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class Record  implements Serializable {
     public String data;
+    public String time;
     public String price;
     public String kol;
     public String phone;
@@ -15,8 +16,9 @@ public class Record  implements Serializable {
 
     }
 
-    public Record(String data, String price, String kol, String phone, String key) {
+    public Record(String data, String time, String price, String kol, String phone, String key) {
         this.data = data;
+        this.time = time;
         this.price = price;
         this.kol = kol;
         this.phone = phone;
@@ -27,6 +29,7 @@ public class Record  implements Serializable {
     public String toString() {
         return "Record{" +
                 "data='" + data + '\'' +
+                ", time='" + time + '\'' +
                 ", price='" + price + '\'' +
                 ", kol='" + kol + '\'' +
                 ", phone='" + phone + '\'' +
@@ -37,6 +40,7 @@ public class Record  implements Serializable {
     public Map<String, Object> toMap(){
         HashMap<String, Object> result = new HashMap<>();
         result.put("data", data);
+        result.put("time", time);
         result.put("price", price);
         result.put("kol", kol);
         result.put("phone", phone);
