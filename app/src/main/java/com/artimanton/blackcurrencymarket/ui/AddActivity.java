@@ -20,7 +20,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class AddActivity extends AppCompatActivity {
-    public EditText etCity, etData, etPrice, etKol, etPhone, etKey;
+    public EditText etCity, etData, etCurrency, etPrice, etKol, etPhone, etKey;
     private String dateText, timeText;
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -34,6 +34,7 @@ public class AddActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         etCity = (EditText) findViewById(R.id.etCity);
         etData = (EditText) findViewById(R.id.etData);
+        etCurrency = (EditText) findViewById(R.id.etСurrency);
         etPrice = (EditText) findViewById(R.id.etPrice);
         etKol = (EditText) findViewById(R.id.etKol);
         etPhone = (EditText) findViewById(R.id.etPhone);
@@ -52,7 +53,7 @@ public class AddActivity extends AppCompatActivity {
     public void addBtn(View view) {
         reference = database.getReference(etCity.getText().toString());
         String id = reference.push().getKey();
-        Record newAdvert = new Record(dateText, timeText, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);
+        Record newAdvert = new Record(dateText, timeText, etCurrency.getText().toString(), etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);
 
         Map<String, Object> advertValue = newAdvert.toMap();
         Map<String, Object> record = new HashMap<>();
