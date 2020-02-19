@@ -11,12 +11,14 @@
         android:id="@+id/etCity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="город"/>
-    <EditText
-        android:id="@+id/etData"
+        android:hint="город"
+        android:inputType="text"/>
+
+    <Spinner
+        android:id="@+id/spinner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="дата"/>
+        android:layout_height="wrap_content">
+    </Spinner>
     <EditText
         android:id="@+id/etСurrency"
         android:layout_width="match_parent"
@@ -26,17 +28,20 @@
         android:id="@+id/etPrice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="цена"/>
+        android:hint="цена"
+        android:inputType="number"/>
     <EditText
         android:id="@+id/etKol"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="количество"/>
+        android:hint="количество"
+        android:inputType="number"/>
     <EditText
         android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="телефон"/>
+        android:hint="телефон"
+        android:inputType="phone"/>
 
     <Button
         android:layout_width="match_parent"

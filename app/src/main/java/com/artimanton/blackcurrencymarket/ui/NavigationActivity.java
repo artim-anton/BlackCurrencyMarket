@@ -47,9 +47,4 @@ public class NavigationActivity extends TabActivity {
         });
     }
 
-    public void addBtnNavigation(View view) {
-        Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
-        startActivity(intent);
-    }
-
 }
