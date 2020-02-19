@@ -32,7 +32,7 @@ public class EuroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_euro);
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("zp/evro");
+        reference = database.getReference("Запорожская/evro");
 
         result = new ArrayList<>();
         recyclerView =  findViewById(R.id.record_list);

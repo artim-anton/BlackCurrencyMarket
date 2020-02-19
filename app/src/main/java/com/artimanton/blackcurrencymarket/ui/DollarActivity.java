@@ -33,7 +33,7 @@ public class DollarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dollar);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("zp/dollar");
+        reference = database.getReference("Запорожская/dollar");
 
         result = new ArrayList<>();
         recyclerView =  findViewById(R.id.record_list);

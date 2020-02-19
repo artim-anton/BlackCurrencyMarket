@@ -23,9 +23,9 @@ import java.util.Locale;
 import java.util.Map;
 
 public class AddActivity extends AppCompatActivity {
-    public EditText etData, etPrice, etKol, etPhone, etKey;
-    public String etCity, etCurrency, path;
-    public Spinner spinner_currency, spinner_city;
+    public EditText  etCity, etData, etPrice, etKol, etPhone, etKey;
+    public String etSellBuy, etRegion, etCurrency, path;
+    public Spinner spinner_sell, spinner_currency, spinner_city;
     private String dateText, timeText;
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -35,6 +35,33 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        String[] data_cell = {"КУПЛЮ", "ПРОДАМ"};
+
+
+        // адаптер
+        ArrayAdapter<String> adapter_sell = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_cell);
+        adapter_sell.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter.setDropDownViewResource(R.layout.spiner_item);
+
+        spinner_sell = (Spinner) findViewById(R.id.spinner_sell_buy);
+        spinner_sell.setAdapter(adapter_sell);
+        // заголовок
+        spinner_sell.setPrompt("Title");
+        // выделяем элемент
+        spinner_sell.setSelection(0);
+        // устанавливаем обработчик нажатия
+        spinner_sell.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // показываем позиция нажатого элемента
+                //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
 
         String[] data_currency = {"$", "€"};
 
@@ -64,8 +91,6 @@ public class AddActivity extends AppCompatActivity {
         });
 
 
-        //String[] data_city = {"Винницкая", "Волынская", "Днепропетровск", "Донецк", "Житомирская", "Закарпатская", "Запорожская", "Ивано-Франковска", "Киевская", "Кировоградская", "Луганска", "Львовская", "Николаевская", "Одесская", "Полтавская", "Ровенская", "Сумская", "Тернопольская", "Харьковская", "Херсонская", "Хмельницкая", "Черкасская", "Черновицкая", "Черниговская"};
-        //"Вінницька", "Волинська", "Дніпропетровська", "Донецька", "Житомирська", "Закарпатська", "Запорізька", "Івано-Франківська", "Київська", "Кіровоградська", "Луганська", "Львівська", "Миколаївська", "Одеська", "Полтавська", "Рівненська", "Сумська", "Тернопільська", "Харківська", "Херсонська", "Хмельницька", "Черкаська", "Чернівецька", "Чернігівська"
 
         final String[] data_city = getResources().getStringArray(
                 R.array.data_city);
@@ -95,7 +120,8 @@ public class AddActivity extends AppCompatActivity {
         });
 
         database = FirebaseDatabase.getInstance();
-        //etCity = (EditText) findViewById(R.id.etCity);
+
+        etCity = (EditText) findViewById(R.id.etCity);
         //etData = (EditText) findViewById(R.id.etData);
         etPrice = (EditText) findViewById(R.id.etPrice);
         etKol = (EditText) findViewById(R.id.etKol);
@@ -113,14 +139,15 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void addBtn(View view) {
-        etCity = spinner_city.getSelectedItem().toString();
+        etSellBuy = spinner_sell.getSelectedItem().toString();
+        etRegion = spinner_city.getSelectedItem().toString();
         etCurrency = spinner_currency.getSelectedItem().toString();
         if (etCurrency == "$") {path = "dollar";}
         if (etCurrency == "€") {path = "evro";}
-        reference = database.getReference(etCity+"/"+path);
+        reference = database.getReference(etRegion+"/"+path);
 
         String id = reference.push().getKey();
-        Record newAdvert = new Record(dateText, timeText, etCurrency, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);
+        Record newAdvert = new Record(dateText, timeText, etSellBuy, etCity.getText().toString(), etCurrency, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);
 
         Map<String, Object> advertValue = newAdvert.toMap();
         Map<String, Object> record = new HashMap<>();
