@@ -55,7 +55,8 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="add"
+        android:text="Сохранить"
+        android:background="@drawable/border"
         tools:ignore="MissingConstraints"
         android:onClick="addBtn"/>
 
