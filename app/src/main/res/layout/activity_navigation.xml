@@ -29,4 +29,12 @@
         android:layout_height="wrap_content"
         android:text="add Activity"
         android:onClick="addBtnNavigation"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:src="@drawable/ic_add_white_48dp"
+        android:contentDescription="@string/submit"
+        android:layout_margin="16dp" />
 </LinearLayout>

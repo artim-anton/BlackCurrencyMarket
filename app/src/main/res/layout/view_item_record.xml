@@ -7,41 +7,53 @@
 
      <TextView
          android:id="@+id/et_data"
-         android:layout_width="wrap_content"
+         android:layout_width="0dp"
          android:layout_height="wrap_content"
-         android:layout_weight="1"
+         android:layout_weight="0.2"
+         android:paddingTop="8dp"
+         android:gravity="center"
+         android:background="@color/color_data"
          android:text="06.02.2020">
      </TextView>
 
     <TextView
         android:id="@+id/et_currency"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.2"
+        android:gravity="center"
+        android:textColor="@color/color_kol"
         android:text="$">
     </TextView>
 
     <TextView
         android:id="@+id/et_price"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.2"
+        android:gravity="left"
+        android:textColor="@color/color_price"
         android:text="25.3">
     </TextView>
 
     <TextView
         android:id="@+id/et_kol"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.2"
+        android:gravity="left"
+        android:textColor="@color/color_kol"
         android:text="10000">
     </TextView>
 
     <TextView
         android:id="@+id/et_phone"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="0.3"
+        android:paddingTop="8dp"
+        android:gravity="center"
+        android:background="@color/color_phone"
         android:text="0978792587">
     </TextView>
 

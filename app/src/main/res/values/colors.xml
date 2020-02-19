@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="color_data">#e2f1f6</color>
+    <color name="color_phone">#f3f8fb</color>
+    <color name="color_kol">#000</color>
+    <color name="color_price">#cb514e</color>
 </resources>
