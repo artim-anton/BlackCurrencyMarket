@@ -7,7 +7,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,9 +23,9 @@ import java.util.Locale;
 import java.util.Map;
 
 public class AddActivity extends AppCompatActivity {
-    public EditText etCity, etData, etPrice, etKol, etPhone, etKey;
-    public String etCurrency, path;
-    public Spinner spinner;
+    public EditText etData, etPrice, etKol, etPhone, etKey;
+    public String etCity, etCurrency, path;
+    public Spinner spinner_currency, spinner_city;
     private String dateText, timeText;
     private FirebaseDatabase database;
     private DatabaseReference reference;
@@ -37,26 +36,58 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        String[] data = {"$", "€"};
+        String[] data_currency = {"$", "€"};
 
 
         // адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter_currency = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_currency);
+        adapter_currency.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //adapter.setDropDownViewResource(R.layout.spiner_item);
 
-        spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setAdapter(adapter);
+        spinner_currency = (Spinner) findViewById(R.id.spinner_currency);
+        spinner_currency.setAdapter(adapter_currency);
         // заголовок
-        spinner.setPrompt("Title");
+        spinner_currency.setPrompt("Title");
         // выделяем элемент
-        spinner.setSelection(0);
+        spinner_currency.setSelection(0);
         // устанавливаем обработчик нажатия
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_currency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 // показываем позиция нажатого элемента
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
+
+
+        //String[] data_city = {"Винницкая", "Волынская", "Днепропетровск", "Донецк", "Житомирская", "Закарпатская", "Запорожская", "Ивано-Франковска", "Киевская", "Кировоградская", "Луганска", "Львовская", "Николаевская", "Одесская", "Полтавская", "Ровенская", "Сумская", "Тернопольская", "Харьковская", "Херсонская", "Хмельницкая", "Черкасская", "Черновицкая", "Черниговская"};
+        //"Вінницька", "Волинська", "Дніпропетровська", "Донецька", "Житомирська", "Закарпатська", "Запорізька", "Івано-Франківська", "Київська", "Кіровоградська", "Луганська", "Львівська", "Миколаївська", "Одеська", "Полтавська", "Рівненська", "Сумська", "Тернопільська", "Харківська", "Херсонська", "Хмельницька", "Черкаська", "Чернівецька", "Чернігівська"
+
+        final String[] data_city = getResources().getStringArray(
+                R.array.data_city);
+        // адаптер
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_city);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+
+        spinner_city = (Spinner) findViewById(R.id.spinner_city);
+        spinner_city.setAdapter(adapter);
+        // заголовок
+        spinner_city.setPrompt("Title");
+        // выделяем элемент
+        spinner_city.setSelection(0);
+        // устанавливаем обработчик нажатия
+        spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // показываем позиция нажатого элемента
+                //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -64,7 +95,7 @@ public class AddActivity extends AppCompatActivity {
         });
 
         database = FirebaseDatabase.getInstance();
-        etCity = (EditText) findViewById(R.id.etCity);
+        //etCity = (EditText) findViewById(R.id.etCity);
         //etData = (EditText) findViewById(R.id.etData);
         etPrice = (EditText) findViewById(R.id.etPrice);
         etKol = (EditText) findViewById(R.id.etKol);
@@ -82,10 +113,11 @@ public class AddActivity extends AppCompatActivity {
     }
 
     public void addBtn(View view) {
-        etCurrency = spinner.getSelectedItem().toString();
+        etCity = spinner_city.getSelectedItem().toString();
+        etCurrency = spinner_currency.getSelectedItem().toString();
         if (etCurrency == "$") {path = "dollar";}
         if (etCurrency == "€") {path = "evro";}
-        reference = database.getReference(etCity.getText().toString()+"/"+path);
+        reference = database.getReference(etCity+"/"+path);
 
         String id = reference.push().getKey();
         Record newAdvert = new Record(dateText, timeText, etCurrency, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);

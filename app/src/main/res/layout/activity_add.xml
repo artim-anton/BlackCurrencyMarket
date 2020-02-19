@@ -7,6 +7,13 @@
     android:layout_margin="8dp"
     android:orientation="vertical"
     tools:context=".ui.AddActivity">
+
+    <Spinner
+        android:id="@+id/spinner_city"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </Spinner>
+
     <EditText
         android:id="@+id/etCity"
         android:layout_width="match_parent"
@@ -15,15 +22,11 @@
         android:inputType="text"/>
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/spinner_currency"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="40dp">
     </Spinner>
-    <EditText
-        android:id="@+id/etСurrency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="валюта"/>
+
     <EditText
         android:id="@+id/etPrice"
         android:layout_width="match_parent"

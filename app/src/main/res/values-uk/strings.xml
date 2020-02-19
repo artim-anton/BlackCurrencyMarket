@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">BlackCurrencyMarket</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="facebook_application_id">2535574336678330</string>
+    <string name="text_activity1">Это первое Activity</string>
+    <string name="text_activity2">Это второе Activity</string>
+    <string name="title_activity_test">Test</string>
+</resources>

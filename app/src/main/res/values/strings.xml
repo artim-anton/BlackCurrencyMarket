@@ -4,6 +4,31 @@
     <string name="facebook_application_id">2535574336678330</string>
     <string name="text_activity1">Это первое Activity</string>
     <string name="text_activity2">Это второе Activity</string>
-    <string name="submit">Добавить заявку</string>
     <string name="title_activity_test">Test</string>
+    <string-array name="data_city">
+        <item>Винницкая</item>
+        <item>Волынская</item>
+        <item>Днепропетровск</item>
+        <item>Донецк</item>
+        <item>Житомирская</item>
+        <item>Закарпатская</item>
+        <item>Запорожская</item>
+        <item>Ивано-Франковска</item>
+        <item>Киевская</item>
+        <item>Кировоградская</item>
+        <item>Луганска</item>
+        <item>Львовская</item>
+        <item>Николаевская</item>
+        <item>Одесская</item>
+        <item>Полтавская</item>
+        <item>Ровенская</item>
+        <item>Сумская</item>
+        <item>Тернопольская</item>
+        <item>Харьковская</item>
+        <item>Херсонская</item>
+        <item>Хмельницкая</item>
+        <item>Черкасская</item>
+        <item>Черновицкая</item>
+        <item>Черниговская</item>
+    </string-array>
 </resources>
