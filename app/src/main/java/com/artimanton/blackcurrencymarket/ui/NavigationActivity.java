@@ -13,7 +13,6 @@ import android.widget.TabHost;
 
 import com.artimanton.blackcurrencymarket.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
 public class NavigationActivity extends TabActivity {
     public Spinner spinner_city;
@@ -83,8 +82,7 @@ public class NavigationActivity extends TabActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
                 startActivity(intent);
-                Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
     }
