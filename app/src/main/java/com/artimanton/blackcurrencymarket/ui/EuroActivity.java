@@ -38,6 +38,8 @@ public class EuroActivity extends AppCompatActivity {
         recyclerView =  findViewById(R.id.record_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
         recyclerView.setLayoutManager(layoutManager);
 
         adapter = new RecordAdapter(result);

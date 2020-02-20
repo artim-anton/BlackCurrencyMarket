@@ -35,7 +35,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         holder.etCity.setText(record.city);
         holder.etData.setText(record.data);
         holder.etTime.setText(record.time);
-        if (record.sell_buy == "ПРОДАМ") {holder.etSell.setBackgroundColor(R.color.color_price);}
+        if (record.sell_buy.equals("ПРОДАМ")) {holder.etSell.setBackgroundResource(R.color.color_price);}
+        //holder.etSell.setBackgroundResource(R.color.color_price);
         holder.etSell.setText(record.sell_buy);
         holder.etPrice.setText(record.price);
         holder.etKol.setText(record.kol);
