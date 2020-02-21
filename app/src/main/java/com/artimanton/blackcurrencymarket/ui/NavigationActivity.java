@@ -19,6 +19,7 @@ public class NavigationActivity extends TabActivity {
     // это будет именем файла настроек
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_COUNTER = "counter";
+    public static final String APP_PREFERENCES_CITY = "city";
     private SharedPreferences mSettings;
 
     @Override
@@ -51,6 +52,7 @@ public class NavigationActivity extends TabActivity {
                 //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_COUNTER, position);
+                editor.putString(APP_PREFERENCES_CITY, spinner_city.getSelectedItem().toString());
                 editor.apply();
             }
             @Override

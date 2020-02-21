@@ -1,5 +1,7 @@
 package com.artimanton.blackcurrencymarket.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,11 @@ import java.util.List;
 
 public class DollarActivity extends AppCompatActivity {
 
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_COUNTER = "counter";
+    public static final String APP_PREFERENCES_CITY = "city";
+    private SharedPreferences mSettings;
+
     private RecyclerView recyclerView;
     private List<Record> result;
     private RecordAdapter adapter;
@@ -32,8 +39,12 @@ public class DollarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dollar);
 
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+
+        String setting_city = mSettings.getString(APP_PREFERENCES_CITY, String.valueOf(0));
+
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Запорожская/dollar");
+        reference = database.getReference(setting_city + "/dollar");
 
         result = new ArrayList<>();
         recyclerView =  findViewById(R.id.record_list);
