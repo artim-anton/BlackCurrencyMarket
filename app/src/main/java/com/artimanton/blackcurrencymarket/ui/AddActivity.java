@@ -34,7 +34,6 @@ public class AddActivity extends AppCompatActivity {
 
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_COUNTER = "counter";
-    public static final String APP_PREFERENCES_CITY = "city";
     private SharedPreferences mSettings;
 
     @SuppressLint("NewApi")
@@ -114,7 +113,7 @@ public class AddActivity extends AppCompatActivity {
         // заголовок
         spinner_city.setPrompt("Title");
         // выделяем элемент
-        spinner_city.setSelection(0);
+        spinner_city.setSelection(mSettings.getInt(APP_PREFERENCES_COUNTER, 0));
         // устанавливаем обработчик нажатия
         spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -122,6 +121,8 @@ public class AddActivity extends AppCompatActivity {
                                        int position, long id) {
                 // показываем позиция нажатого элемента
                 //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putInt(APP_PREFERENCES_COUNTER, position);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
