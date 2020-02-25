@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Record  implements Serializable {
+public class RecordModel implements Serializable {
     public String data;
     public String time;
     public String sell_buy;
@@ -15,11 +15,11 @@ public class Record  implements Serializable {
     public String phone;
     public String key;
 
-    public Record(){
+    public RecordModel(){
 
     }
 
-    public Record(String data, String time, String sell_buy, String city, String currency,  String price, String kol, String phone, String key) {
+    public RecordModel(String data, String time, String sell_buy, String city, String currency, String price, String kol, String phone, String key) {
         this.data = data;
         this.time = time;
         this.city = city;
@@ -34,7 +34,7 @@ public class Record  implements Serializable {
 
     @Override
     public String toString() {
-        return "Record{" +
+        return "RecordModel{" +
                 "data='" + data + '\'' +
                 ", time='" + time + '\'' +
                 ", sell_buy='" + sell_buy + '\'' +

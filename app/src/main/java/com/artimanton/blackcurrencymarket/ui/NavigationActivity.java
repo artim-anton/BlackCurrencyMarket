@@ -21,6 +21,8 @@ public class NavigationActivity extends TabActivity {
     public static final String APP_PREFERENCES_COUNTER = "counter";
     public static final String APP_PREFERENCES_CITY = "city";
     private SharedPreferences mSettings;
+    TabHost tabHost;
+    TabHost.TabSpec tabSpec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class NavigationActivity extends TabActivity {
                 editor.putInt(APP_PREFERENCES_COUNTER, position);
                 editor.putString(APP_PREFERENCES_CITY, spinner_city.getSelectedItem().toString());
                 editor.apply();
+                tabSpec.setContent(new Intent(NavigationActivity.this, DollarActivity.class));
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -61,12 +64,12 @@ public class NavigationActivity extends TabActivity {
         });
 
         // получаем TabHost
-        TabHost tabHost = getTabHost();
+       tabHost = getTabHost();
 
         // инициализация была выполнена в getTabHost
         // метод setup вызывать не нужно
 
-        TabHost.TabSpec tabSpec;
+
 
         tabSpec = tabHost.newTabSpec("tag1");
         tabSpec.setIndicator("Доллары");

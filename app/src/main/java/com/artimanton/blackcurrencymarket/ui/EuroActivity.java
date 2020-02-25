@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.artimanton.blackcurrencymarket.R;
 import com.artimanton.blackcurrencymarket.adapter.RecordAdapter;
-import com.artimanton.blackcurrencymarket.model.Record;
+import com.artimanton.blackcurrencymarket.model.RecordModel;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,7 +21,7 @@ import java.util.List;
 public class EuroActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private List<Record> result;
+    private List<RecordModel> result;
     private RecordAdapter adapter;
 
     private FirebaseDatabase database;
@@ -54,13 +54,13 @@ public class EuroActivity extends AppCompatActivity {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                result.add(dataSnapshot.getValue(Record.class));
+                result.add(dataSnapshot.getValue(RecordModel.class));
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Record record = dataSnapshot.getValue(Record.class);
+                RecordModel record = dataSnapshot.getValue(RecordModel.class);
                 int index = getItemIndex(record);
                 result.set(index, record);
                 adapter.notifyItemChanged(index);
@@ -68,7 +68,7 @@ public class EuroActivity extends AppCompatActivity {
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-                Record bus = dataSnapshot.getValue(Record.class);
+                RecordModel bus = dataSnapshot.getValue(RecordModel.class);
                 int index = getItemIndex(bus);
                 result.remove(index);
                 adapter.notifyItemRemoved(index);
@@ -87,7 +87,7 @@ public class EuroActivity extends AppCompatActivity {
         });
     }
 
-    private int getItemIndex(Record record){
+    private int getItemIndex(RecordModel record){
         int index = -1;
         for (int i = 0; i < result.size(); i++) {
             if(result.get(i).key.equals(record.key)){

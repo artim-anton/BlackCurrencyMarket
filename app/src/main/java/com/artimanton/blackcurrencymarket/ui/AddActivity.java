@@ -1,6 +1,8 @@
 package com.artimanton.blackcurrencymarket.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,7 +13,7 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.artimanton.blackcurrencymarket.R;
-import com.artimanton.blackcurrencymarket.model.Record;
+import com.artimanton.blackcurrencymarket.model.RecordModel;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -30,11 +32,18 @@ public class AddActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference reference;
 
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_COUNTER = "counter";
+    public static final String APP_PREFERENCES_CITY = "city";
+    private SharedPreferences mSettings;
+
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
         String[] data_cell = {"КУПЛЮ", "ПРОДАМ"};
 
@@ -147,11 +156,12 @@ public class AddActivity extends AppCompatActivity {
         reference = database.getReference(etRegion+"/"+path);
 
         String id = reference.push().getKey();
-        Record newAdvert = new Record(dateText, timeText, etSellBuy, etCity.getText().toString(), etCurrency, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);
+        RecordModel newAdvert = new RecordModel(dateText, timeText, etSellBuy, etCity.getText().toString(), etCurrency, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);
 
         Map<String, Object> advertValue = newAdvert.toMap();
         Map<String, Object> record = new HashMap<>();
         record.put(id, advertValue);
         reference.updateChildren(record);
+        this.finish();
     }
 }

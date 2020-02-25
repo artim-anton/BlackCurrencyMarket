@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.artimanton.blackcurrencymarket.R;
-import com.artimanton.blackcurrencymarket.model.Record;
+import com.artimanton.blackcurrencymarket.model.RecordModel;
 
 import java.util.List;
 
 public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordViewHolder> {
 
-    private List<Record> list;
+    private List<RecordModel> list;
 
-    public RecordAdapter(List<Record> list) {
+    public RecordAdapter(List<RecordModel> list) {
         this.list = list;
     }
 
@@ -31,7 +31,7 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
     @SuppressLint("ResourceAsColor")
     @Override
     public void onBindViewHolder(@NonNull RecordViewHolder holder, int position) {
-        final Record record = list.get(position);
+        final RecordModel record = list.get(position);
         holder.etCity.setText(record.city);
         holder.etData.setText(record.data);
         holder.etTime.setText(record.time);
