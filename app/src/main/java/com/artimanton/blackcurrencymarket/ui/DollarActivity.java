@@ -3,6 +3,7 @@ package com.artimanton.blackcurrencymarket.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -35,30 +36,10 @@ public class DollarActivity extends AppCompatActivity {
     private DatabaseReference reference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dollar);
-
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
-        String setting_city = mSettings.getString(APP_PREFERENCES_CITY, String.valueOf(0));
-
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference(setting_city + "/dollar");
-
-        result = new ArrayList<>();
-        recyclerView =  findViewById(R.id.record_list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new RecordAdapter(result);
-        recyclerView.setAdapter(adapter);
-
-        updateList();
-
+        load_city();
 
     }
 
@@ -109,5 +90,26 @@ public class DollarActivity extends AppCompatActivity {
 
         }
         return index;
+    }
+
+    public void load_city(){
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        String setting_city = mSettings.getString(APP_PREFERENCES_CITY, String.valueOf(0));
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference(setting_city + "/dollar");
+
+        result = new ArrayList<>();
+        recyclerView =  findViewById(R.id.record_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new RecordAdapter(result);
+        recyclerView.setAdapter(adapter);
+
+        updateList();
+
     }
 }

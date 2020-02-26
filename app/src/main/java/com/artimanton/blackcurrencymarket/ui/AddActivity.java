@@ -12,6 +12,8 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.artimanton.blackcurrencymarket.R;
 import com.artimanton.blackcurrencymarket.model.RecordModel;
 import com.google.firebase.database.DatabaseReference;
@@ -36,11 +38,15 @@ public class AddActivity extends AppCompatActivity {
     public static final String APP_PREFERENCES_COUNTER = "counter";
     private SharedPreferences mSettings;
 
+
+
     @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+
 
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 

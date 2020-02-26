@@ -11,10 +11,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TabHost;
 
+import com.anjlab.android.iab.v3.BillingProcessor;
+import com.anjlab.android.iab.v3.TransactionDetails;
 import com.artimanton.blackcurrencymarket.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class NavigationActivity extends TabActivity {
+public class NavigationActivity extends TabActivity implements BillingProcessor.IBillingHandler {
     public Spinner spinner_city;
     // это будет именем файла настроек
     public static final String APP_PREFERENCES = "mysettings";
@@ -23,11 +25,19 @@ public class NavigationActivity extends TabActivity {
     private SharedPreferences mSettings;
     TabHost tabHost;
     TabHost.TabSpec tabSpec;
+    DollarActivity dollarActivity;
+
+    private BillingProcessor bp;
+    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwSzeEgAXyQBBKCp724PVqTDbIzY9CGhkTdXFrPNmxpwmLjUyHB9oR3rlkOQIbCPRgU1nWaWqD27qhijbnx1dm3sNZ136EnB2tzbMZjTU88p9Meizz8YfkAhD0csKiEzYk7tzbhO9EWfIprDylbD6UpJsa8OJS//8xQHykcgt2r/DKICxoRoR3hxNczgQY9dtJOPcdrMwKKB402lkqqdEAEyN1t5E0vxBQpqU6Ouufjx3aUrI12GovTnn1kOyT4UUYt20UQz9E9M9GRaBoHgxPstZB8rY6ffkkqaKmmmqjFM5g8hY9OxNF8jkApcjgAtvq03t4j6YOiFUetI+4yc5wIDAQAB"; // PUT YOUR MERCHANT KEY HERE;
+    private static final String PRODUCT_ID = "com.artimanton.infovesele";
+    private static final String SUBSCRIPTION_ID = "com.artimanton.infovesele.subs1";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+
+        bp = new BillingProcessor(this, LICENSE_KEY, this);
 
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
 
@@ -36,7 +46,6 @@ public class NavigationActivity extends TabActivity {
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_city);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
 
 
         spinner_city = (Spinner) findViewById(R.id.spinner_city);
@@ -56,7 +65,7 @@ public class NavigationActivity extends TabActivity {
                 editor.putInt(APP_PREFERENCES_COUNTER, position);
                 editor.putString(APP_PREFERENCES_CITY, spinner_city.getSelectedItem().toString());
                 editor.apply();
-                tabSpec.setContent(new Intent(NavigationActivity.this, DollarActivity.class));
+
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -85,11 +94,42 @@ public class NavigationActivity extends TabActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
-                startActivity(intent);
+                if (bp.isSubscribed(SUBSCRIPTION_ID)) {
+                    Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(NavigationActivity.this, BillingActivity.class);
+                    startActivity(intent);
+                }
+
+
                 //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
             }
         });
     }
 
+    @Override
+    public void onProductPurchased(String productId, TransactionDetails details) {
+
+    }
+
+    @Override
+    public void onPurchaseHistoryRestored() {
+        bp.loadOwnedPurchasesFromGoogle();
+    }
+
+    @Override
+    public void onBillingError(int errorCode, Throwable error) {
+
+    }
+
+    @Override
+    public void onBillingInitialized() {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 }

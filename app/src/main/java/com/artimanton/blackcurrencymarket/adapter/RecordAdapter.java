@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,8 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.RecordView
         holder.etCity.setText(record.city);
         holder.etData.setText(record.data);
         holder.etTime.setText(record.time);
-        if (record.sell_buy.equals("ПРОДАМ")) {holder.etSell.setBackgroundResource(R.color.color_price);}
+        if (record.sell_buy!=null){
+        if (record.sell_buy.equals("ПРОДАМ")) {holder.etSell.setBackgroundResource(R.color.color_price);}}
         //holder.etSell.setBackgroundResource(R.color.color_price);
         holder.etSell.setText(record.sell_buy);
         holder.etPrice.setText(record.price);

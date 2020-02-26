@@ -8,4 +8,5 @@
     <color name="color_kol">#000</color>
     <color name="color_price">#cb514e</color>
     <color name="whiteish">#4CAF50</color>
+    <color name="black">#000000</color>
 </resources>

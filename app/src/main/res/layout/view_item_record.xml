@@ -24,7 +24,6 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="#797979"
-        android:textSize="10dp"
         android:text="Веселое">
     </TextView>
 </LinearLayout>
