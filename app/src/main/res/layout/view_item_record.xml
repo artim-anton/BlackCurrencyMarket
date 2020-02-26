@@ -4,6 +4,7 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
+
 <LinearLayout
     android:layout_width="0dp"
     android:layout_height="wrap_content"
@@ -23,14 +24,16 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:textColor="#797979"
+        android:textSize="10dp"
         android:text="Веселое">
     </TextView>
 </LinearLayout>
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="0.25"
+        android:background="@color/color_data"
         android:orientation="vertical">
         <TextView
             android:id="@+id/et_time"
@@ -38,7 +41,6 @@
             android:layout_height="wrap_content"
             android:textColor="@color/color_kol"
             android:gravity="center"
-            android:background="@color/color_data"
             android:text="07:45:17">
         </TextView>
      <TextView
@@ -46,7 +48,6 @@
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"
          android:gravity="center"
-         android:background="@color/color_data"
          android:textSize="10dp"
          android:text="06.02.2020">
      </TextView>
@@ -77,17 +78,26 @@
         android:text="10000">
     </TextView>
 
-    <TextView
-        android:id="@+id/et_phone"
+
+
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="0.3"
-        android:paddingTop="8dp"
-        android:gravity="center"
         android:background="@color/color_phone"
-        android:text="0978792587">
-    </TextView>
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/et_phone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:autoLink="phone|web"
+            android:gravity="center"
+            android:text="0978792587">
+        </TextView>
 
 
+    </LinearLayout>
 
 </LinearLayout>
+

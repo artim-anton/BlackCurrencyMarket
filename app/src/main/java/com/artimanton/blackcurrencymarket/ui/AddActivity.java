@@ -71,7 +71,7 @@ public class AddActivity extends AppCompatActivity {
             }
         });
 
-        String[] data_currency = {"$", "€"};
+        String[] data_currency = {"$", "€","₽"};
 
 
         // адаптер
