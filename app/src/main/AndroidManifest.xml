@@ -18,9 +18,9 @@
         <activity android:name=".ui.AddActivity" />
         <activity android:name=".ui.EuroActivity" />
         <activity android:name=".ui.DollarActivity" />
-        <activity android:name=".ui.MainActivity" />
+        <activity android:name=".ui.NavigationActivity" />
         <activity android:name=".ui.BillingActivity" />
-        <activity android:name=".ui.NavigationActivity">
+        <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

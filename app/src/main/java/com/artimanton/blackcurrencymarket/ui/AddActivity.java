@@ -16,6 +16,7 @@ import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.artimanton.blackcurrencymarket.R;
 import com.artimanton.blackcurrencymarket.model.RecordModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -162,12 +163,14 @@ public class AddActivity extends AppCompatActivity {
         if (etCurrency == "€") {path = "evro";}
         reference = database.getReference(etRegion+"/"+path);
 
-        String id = reference.push().getKey();
-        RecordModel newAdvert = new RecordModel(dateText, timeText, etSellBuy, etCity.getText().toString(), etCurrency, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), id);
+        String mUserId = FirebaseAuth.getInstance().getUid();
+        //String id = reference.push().getKey();
+        RecordModel newAdvert = new RecordModel(dateText, timeText, etSellBuy, etCity.getText().toString(), etCurrency, etPrice.getText().toString(), etKol.getText().toString(), etPhone.getText().toString(), mUserId);
 
         Map<String, Object> advertValue = newAdvert.toMap();
         Map<String, Object> record = new HashMap<>();
-        record.put(id, advertValue);
+        reference.child(mUserId).removeValue();
+        record.put(mUserId, advertValue);
         reference.updateChildren(record);
         this.finish();
     }

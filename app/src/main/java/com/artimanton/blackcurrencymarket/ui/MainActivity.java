@@ -2,6 +2,7 @@ package com.artimanton.blackcurrencymarket.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_REQUEST_CODE = 7117;
     List<AuthUI.IdpConfig> providers;
     Button btn_sign_out;
+    MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +56,27 @@ public class MainActivity extends AppCompatActivity {
                 
             }
         });
-        //Init providers
-        providers = Arrays.asList(
-                new AuthUI.IdpConfig.EmailBuilder().build(),
-                new AuthUI.IdpConfig.PhoneBuilder().build(),
-                new AuthUI.IdpConfig.FacebookBuilder().build(),
-                new AuthUI.IdpConfig.GoogleBuilder().build()
-        );
-        showSingInOptions();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+
+            // User is signed in
+            Toast.makeText(MainActivity.this, "onAuthStateChanged:signed_in:" + user.getUid(),Toast.LENGTH_SHORT).show();
+            btn_sign_out.setEnabled(true);
+        } else {
+            //Init providers
+            providers = Arrays.asList(
+                    new AuthUI.IdpConfig.EmailBuilder().build(),
+                    new AuthUI.IdpConfig.PhoneBuilder().build(),
+                    //new AuthUI.IdpConfig.FacebookBuilder().build(),
+                    new AuthUI.IdpConfig.GoogleBuilder().build()
+            );
+            showSingInOptions();
+            // User is signed out
+            Toast.makeText(MainActivity.this, "onAuthStateChanged:signed_out",Toast.LENGTH_SHORT).show();
+        }
+
+
+
     }
 
     private void showSingInOptions() {
@@ -90,5 +105,10 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, ""+response.getError().getMessage(), Toast.LENGTH_LONG).show();
             }
         }
+    }
+
+    public void toNavigationAtivity(View view) {
+        Intent intent = new Intent(MainActivity.this, NavigationActivity.class);
+        startActivity(intent);
     }
 }
