@@ -45,6 +45,13 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 btn_sign_out.setEnabled(false);
+                                //Init providers
+                                providers = Arrays.asList(
+                                        new AuthUI.IdpConfig.EmailBuilder().build(),
+                                        new AuthUI.IdpConfig.PhoneBuilder().build(),
+                                        //new AuthUI.IdpConfig.FacebookBuilder().build(),
+                                        new AuthUI.IdpConfig.GoogleBuilder().build()
+                                );
                                 showSingInOptions();
                             }
                         }) .addOnFailureListener(new OnFailureListener() {
@@ -58,9 +65,8 @@ public class MainActivity extends AppCompatActivity {
         });
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-
             // User is signed in
-            Toast.makeText(MainActivity.this, "onAuthStateChanged:signed_in:" + user.getUid(),Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "onAuthStateChanged:signed_in:" + user,Toast.LENGTH_SHORT).show();
             btn_sign_out.setEnabled(true);
         } else {
             //Init providers
@@ -103,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 Toast.makeText(this, ""+response.getError().getMessage(), Toast.LENGTH_LONG).show();
+
             }
         }
     }
