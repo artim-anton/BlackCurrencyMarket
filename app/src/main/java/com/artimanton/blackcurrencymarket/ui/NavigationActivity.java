@@ -1,20 +1,29 @@
 package com.artimanton.blackcurrencymarket.ui;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.TabActivity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -25,13 +34,15 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
-public class NavigationActivity extends TabActivity implements BillingProcessor.IBillingHandler {
+public class NavigationActivity extends TabActivity implements BillingProcessor.IBillingHandler, NavigationView.OnNavigationItemSelectedListener {
     public Spinner spinner_city;
     // это будет именем файла настроек
     public static final String APP_PREFERENCES = "mysettings";
@@ -50,16 +61,67 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
     private static final int MY_REQUEST_CODE = 7117;
     List<AuthUI.IdpConfig> providers;
     Button btn_sign_out;
+    Button btn_sign_out_drawer;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
-
         bp = new BillingProcessor(this, LICENSE_KEY, this);
+        loadLocate();
+        initializationDrawer();
+        SpinnerCity();
+        initializationTabHost();
+        floatingActionButton();
+        ///АВТОРИЗАЦИЯ
+        authorization();
 
+
+
+
+    }
+
+    private void floatingActionButton() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (bp.isSubscribed(SUBSCRIPTION_ID)) {
+                    Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
+                    startActivity(intent);
+                }else{
+                    Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
+                    startActivity(intent);
+                }
+
+
+                //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+            }
+        });
+    }
+
+    private void initializationTabHost() {
+        // получаем TabHost
+        tabHost = getTabHost();
+
+        // инициализация была выполнена в getTabHost
+        // метод setup вызывать не нужно
+
+
+
+        tabSpec = tabHost.newTabSpec("tag1");
+        tabSpec.setIndicator("Доллары");
+        tabSpec.setContent(new Intent(this, DollarActivity.class));
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tag2");
+        tabSpec.setIndicator("Евро");
+        tabSpec.setContent(new Intent(this, EuroActivity.class));
+        tabHost.addTab(tabSpec);
+    }
+
+    private void SpinnerCity() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-
         final String[] data_city = getResources().getStringArray(
                 R.array.data_city);
         // адаптер
@@ -79,54 +141,20 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 // показываем позиция нажатого элемента
-                //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_COUNTER, position);
                 editor.putString(APP_PREFERENCES_CITY, spinner_city.getSelectedItem().toString());
                 editor.apply();
-
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
             }
         });
+    }
 
-        // получаем TabHost
-       tabHost = getTabHost();
-
-        // инициализация была выполнена в getTabHost
-        // метод setup вызывать не нужно
-
-
-
-        tabSpec = tabHost.newTabSpec("tag1");
-        tabSpec.setIndicator("Доллары");
-        tabSpec.setContent(new Intent(this, DollarActivity.class));
-        tabHost.addTab(tabSpec);
-
-        tabSpec = tabHost.newTabSpec("tag2");
-        tabSpec.setIndicator("Евро");
-        tabSpec.setContent(new Intent(this, EuroActivity.class));
-        tabHost.addTab(tabSpec);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (bp.isSubscribed(SUBSCRIPTION_ID)) {
-                    Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
-                    startActivity(intent);
-                }else{
-                    Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
-                    startActivity(intent);
-                }
-
-
-                //Snackbar.make(view, "Here's a Snackbar", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-            }
-        });
-
-        ///АВТОРИЗАЦИЯ
+    private void authorization() {
         btn_sign_out =(Button) findViewById(R.id.btn_sign_out);
         btn_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,6 +201,17 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
             // User is signed out
             Toast.makeText(NavigationActivity.this, "onAuthStateChanged:signed_out",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void initializationDrawer() {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, R.string.nav_setting, R.string.nav_logout);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -227,5 +266,84 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
 
             }
         }
+    }
+
+    @Override
+    public void recreate() {
+        super.recreate();
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+
+        if (id == R.id.nav_setting) {
+            showChangeLanguageDialog();
+
+        } else if (id == R.id.new_record){
+
+            if (bp.isSubscribed(SUBSCRIPTION_ID)) {
+                Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
+                startActivity(intent);
+            }else{
+                Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
+                startActivity(intent);
+            }
+        }
+        else if (id == R.id.nav_logout){
+
+            this.finish();
+        }
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void showChangeLanguageDialog() {
+        final String[] listItem = {"Русский", "Українська", "Polski", "English"};
+        AlertDialog.Builder mBilder = new AlertDialog.Builder(NavigationActivity.this);
+        mBilder.setTitle(getString(R.string.choose_language));
+        mBilder.setSingleChoiceItems(listItem, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if (i == 0){
+                    setLocate("ru");
+                    recreate();
+                }
+                else if (i == 1){
+                    setLocate("uk");
+                    recreate();
+                }
+                else if (i == 2){
+                    setLocate("pl");
+                    recreate();
+                }
+                else if (i == 3){
+                    setLocate("en");
+                    recreate();
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog mDialog = mBilder.create();
+        mDialog.show();
+    }
+
+    private void setLocate(String lang) {
+        Locale locale = new Locale(lang);
+        Locale.setDefault(locale);
+        Configuration config = new Configuration();
+        config.locale = locale;
+        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+        SharedPreferences.Editor editor = getSharedPreferences("blackCurrencyMarketSetting", MODE_PRIVATE).edit();
+        editor.putString("My_lang", lang);
+        editor.apply();
+    }
+    public void loadLocate(){
+        SharedPreferences prefs = getSharedPreferences("blackCurrencyMarketSetting", Activity.MODE_PRIVATE);
+        String language = prefs.getString("My_lang", "");
+        setLocate(language);
     }
 }

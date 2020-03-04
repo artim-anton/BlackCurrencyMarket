@@ -5,6 +5,16 @@
     <string name="text_activity1">Это первое Activity</string>
     <string name="text_activity2">Это второе Activity</string>
     <string name="title_activity_test">Test</string>
+    <string name="nav_setting">Сменить язык</string>
+    <string name="nav_logout">Выйти</string>
+    <string name="choose_language">Choose language...</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string-array name="screen_array">
+        <item>Screen 1</item>
+        <item>Screen 2</item>
+        <item>Screen 3</item>
+    </string-array>
     <string-array name="data_city">
         <item>Винницкая</item>
         <item>Волынская</item>
@@ -33,4 +43,6 @@
     </string-array>
     <string name="billing_text">Функция добавления объявления платная. Оформите подписку, чтобы иметь возможность размещать объявления. Стоимость 30 грн/мес. Первые 3 дня бесплатно.</string>
     <string name="subscribe_text">Оформить подписку на 1 месяц</string>
+    <string name="new_record">Новая/изменить заявку</string>
+    <string name="delete_record">Удалить заявку</string>
 </resources>

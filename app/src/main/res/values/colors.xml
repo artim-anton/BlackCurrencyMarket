@@ -9,4 +9,6 @@
     <color name="color_price">#cb514e</color>
     <color name="whiteish">#4CAF50</color>
     <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+    <item name="blue" type="color">#FF33B5E5</item>
 </resources>

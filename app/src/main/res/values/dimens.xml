@@ -1,3 +1,14 @@
 <resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="img_size">800dp</dimen>
+    <dimen name="img_size0">0dp</dimen>
+    <dimen name="passenger_trains">12sp</dimen>
+    <dimen name="title_transport">20sp</dimen>
+    <dimen name="title_city_bus">16sp</dimen>
+    <dimen name="padding_bus">10dp</dimen>
 </resources>
