@@ -15,6 +15,14 @@
         <item>Screen 2</item>
         <item>Screen 3</item>
     </string-array>
+    <string-array name="data_country">
+        <item>Россия</item>
+        <item>Украина</item>
+        <item>Беларусь</item>
+        <item>Киргизия</item>
+        <item>Казахстан</item>
+        <item>Молдова</item>
+    </string-array>
     <string-array name="data_city">
         <item>Винницкая</item>
         <item>Волынская</item>
@@ -40,6 +48,54 @@
         <item>Черкасская</item>
         <item>Черновицкая</item>
         <item>Черниговская</item>
+    </string-array>
+    <string-array name="data_city_ru">
+        <item>Амурская</item>
+        <item>Архангельская</item>
+        <item>Астраханская</item>
+        <item>Белгородская</item>
+        <item>Брянская</item>
+        <item>Челябинская</item>
+        <item>Иркутская</item>
+        <item>Ивановская</item>
+        <item>Калининградская</item>
+        <item>Калужская</item>
+        <item>Кемеровская</item>
+        <item>Кировская</item>
+        <item>Костромская</item>
+        <item>Курганская</item>
+        <item>Курская</item>
+        <item>Ленинградская</item>
+        <item>Липецкая</item>
+        <item>Магаданская</item>
+        <item>Московская</item>
+        <item>Мурманская</item>
+        <item>Нижегородская</item>
+        <item>Новгородская</item>
+        <item>Новосибирская</item>
+        <item>Омская</item>
+        <item>Оренбургская</item>
+        <item>Орловская</item>
+        <item>Пензенская</item>
+        <item>Псковская</item>
+        <item>Ростовская</item>
+        <item>Рязанская</item>
+        <item>Сахалинская</item>
+        <item>Самарская</item>
+        <item>Саратовская</item>
+        <item>Смоленская</item>
+        <item>Свердловская</item>
+        <item>Тамбовская</item>
+        <item>Томская</item>
+        <item>Тверская</item>
+        <item>Тульская</item>
+        <item>Тюменская</item>
+        <item>Ульяновская</item>
+        <item>Владимирская</item>
+        <item>Волгоградская</item>
+        <item>Вологодская</item>
+        <item>Воронежская</item>
+        <item>Ярославская</item>
     </string-array>
     <string name="billing_text">Функция добавления объявления платная. Оформите подписку, чтобы иметь возможность размещать объявления. Стоимость 30 грн/мес. Первые 3 дня бесплатно.</string>
     <string name="subscribe_text">Оформить подписку на 1 месяц</string>

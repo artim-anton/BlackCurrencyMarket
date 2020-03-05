@@ -14,6 +14,13 @@
         android:layout_height="wrap_content"
         />
     <Spinner
+        android:id="@+id/spinner_country"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </Spinner>
+
+    <Spinner
         android:id="@+id/spinner_city"
         android:layout_gravity="center"
         android:layout_width="match_parent"

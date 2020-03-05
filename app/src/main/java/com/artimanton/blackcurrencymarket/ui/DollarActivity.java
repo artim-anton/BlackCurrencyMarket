@@ -26,6 +26,7 @@ public class DollarActivity extends AppCompatActivity {
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_COUNTER = "counter";
     public static final String APP_PREFERENCES_CITY = "city";
+    public static final String APP_PREFERENCES_COUNTRY = "country";
     private SharedPreferences mSettings;
 
     private RecyclerView recyclerView;
@@ -95,8 +96,9 @@ public class DollarActivity extends AppCompatActivity {
     public void load_city(){
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         String setting_city = mSettings.getString(APP_PREFERENCES_CITY, String.valueOf(0));
+        String setting_country = mSettings.getString(APP_PREFERENCES_COUNTRY, String.valueOf(0));
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference(setting_city + "/dollar");
+        reference = database.getReference(setting_country + "/" + setting_city + "/" + "dollar");
 
         result = new ArrayList<>();
         recyclerView =  findViewById(R.id.record_list);

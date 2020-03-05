@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.HeaderViewListAdapter;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TabHost;
@@ -43,11 +44,13 @@ import java.util.List;
 import java.util.Locale;
 
 public class NavigationActivity extends TabActivity implements BillingProcessor.IBillingHandler, NavigationView.OnNavigationItemSelectedListener {
-    public Spinner spinner_city;
+    public Spinner spinner_city,spinner_country;
     // это будет именем файла настроек
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_COUNTER = "counter";
+    public static final String APP_PREFERENCES_COUNTER_COUNTRY = "counter_country";
     public static final String APP_PREFERENCES_CITY = "city";
+    public static final String APP_PREFERENCES_COUNTRY = "country";
     private SharedPreferences mSettings;
     TabHost tabHost;
     TabHost.TabSpec tabSpec;
@@ -70,15 +73,60 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
         bp = new BillingProcessor(this, LICENSE_KEY, this);
         loadLocate();
         initializationDrawer();
+        SpinnerCountry();
         SpinnerCity();
         initializationTabHost();
         floatingActionButton();
         ///АВТОРИЗАЦИЯ
         authorization();
 
+        /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerview = navigationView.getHeaderView(0);
+        LinearLayout header = (LinearLayout) headerview.findViewById(R.id.header);
+        header.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(NavigationActivity.this, "clicked", Toast.LENGTH_SHORT).show();
+               // drawer.closeDrawer(GravityCompat.START);
+            }
+        });*/
 
 
+    }
 
+    private void SpinnerCountry() {
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        final String[] data_country = getResources().getStringArray(
+                R.array.data_country);
+        // адаптер
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_country);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+
+        spinner_country = (Spinner) findViewById(R.id.spinner_country);
+        spinner_country.setAdapter(adapter);
+        // заголовок
+        spinner_country.setPrompt("Title");
+        // выделяем элемент
+        spinner_country.setSelection(mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0));
+        // устанавливаем обработчик нажатия
+        spinner_country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int position, long id) {
+                // показываем позиция нажатого элемента
+
+                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                SharedPreferences.Editor editor = mSettings.edit();
+                editor.putInt(APP_PREFERENCES_COUNTER_COUNTRY, position);
+                editor.putString(APP_PREFERENCES_COUNTRY, spinner_country.getSelectedItem().toString());
+                editor.apply();
+                SpinnerCity();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+            }
+        });
     }
 
     private void floatingActionButton() {
@@ -122,8 +170,17 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
 
     private void SpinnerCity() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        final String[] data_city = getResources().getStringArray(
-                R.array.data_city);
+        int int_country = mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0);
+        String[] data_city=null;
+        if (int_country == 0){
+            data_city = getResources().getStringArray(R.array.data_city_ru);
+        }
+        else if (int_country == 1){
+            data_city = getResources().getStringArray(R.array.data_city);
+        }
+
+
+
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_city);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -204,7 +261,7 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
     }
 
     private void initializationDrawer() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.nav_setting, R.string.nav_logout);
         drawer.addDrawerListener(toggle);
@@ -212,6 +269,7 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
