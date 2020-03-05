@@ -23,7 +23,7 @@
         <item>Казахстан</item>
         <item>Молдова</item>
     </string-array>
-    <string-array name="data_city">
+    <string-array name="data_city_ua">
         <item>Винницкая</item>
         <item>Волынская</item>
         <item>Днепропетровская</item>
@@ -96,6 +96,75 @@
         <item>Вологодская</item>
         <item>Воронежская</item>
         <item>Ярославская</item>
+    </string-array>
+    <string-array name="data_city_by">
+        <item>Брестская</item>
+        <item>Гомельская</item>
+        <item>Гродненская</item>
+        <item>Минская</item>
+        <item>Могилевская</item>
+        <item>Витебская</item>
+    </string-array>
+    <string-array name="data_city_kg">
+        <item>Чуйская долина</item>
+        <item>Иссык-Кульская</item>
+        <item>Нарынская</item>
+        <item>Таласская</item>
+        <item>Ошская</item>
+        <item>Баткенская</item>
+    </string-array>
+    <string-array name="data_city_kz">
+    <item>Акмолинская</item>
+    <item>Актюбинская</item>
+    <item>Алматинская</item>
+    <item>Атырауская</item>
+    <item>Восточно-Казахстанская</item>
+    <item>Жамбылская</item>
+    <item>Западно-Казахстанская</item>
+    <item>Карагандинская</item>
+    <item>Костанайская</item>
+    <item>Кызылординская</item>
+    <item>Мангистауская</item>
+    <item>Павлодарская</item>
+    <item>Северо-Казахстанская</item>
+    <item>Туркестанская</item>
+</string-array>
+    <string-array name="data_city_md">
+        <item>Бессарабский</item>
+        <item>Бричанский</item>
+        <item>Глодянский</item>
+        <item>Дондюшанский</item>
+        <item>Дрокиевский</item>
+        <item>Дубоссарский</item>
+        <item>Единецкий</item>
+        <item>Кагульский</item>
+        <item>Каларашский</item>
+        <item>Кантемирский</item>
+        <item>Каушанский</item>
+        <item>Криулянский</item>
+        <item>Леовский</item>
+        <item>Ниспоренский</item>
+        <item>Новоаненский</item>
+        <item>Окницкий</item>
+        <item>Оргеевский</item>
+        <item>Резинский</item>
+        <item>Рышканский</item>
+        <item>Сорокский</item>
+        <item>Страшенский</item>
+        <item>Сынжерейский</item>
+        <item>Тараклийский</item>
+        <item>Теленештский</item>
+        <item>Унгенский</item>
+        <item>Фалештский</item>
+        <item>Флорештский</item>
+        <item>Хынчештский</item>
+        <item>Чимишлийский</item>
+        <item>Шолданештский</item>
+        <item>Штефан-Водский</item>
+        <item>Яловенский</item>
+        <item>Автономное территориальное образование Гагаузия</item>
+        <item>Административно-территориальные единицы Левобережья Днестра</item>
+
     </string-array>
     <string name="billing_text">Функция добавления объявления платная. Оформите подписку, чтобы иметь возможность размещать объявления. Стоимость 30 грн/мес. Первые 3 дня бесплатно.</string>
     <string name="subscribe_text">Оформить подписку на 1 месяц</string>

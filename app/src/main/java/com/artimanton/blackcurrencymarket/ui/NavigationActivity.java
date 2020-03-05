@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.HeaderViewListAdapter;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -73,8 +71,8 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
         bp = new BillingProcessor(this, LICENSE_KEY, this);
         loadLocate();
         initializationDrawer();
+        SpinnerCity(false);
         SpinnerCountry();
-        SpinnerCity();
         initializationTabHost();
         floatingActionButton();
         ///АВТОРИЗАЦИЯ
@@ -121,7 +119,7 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
                 editor.putInt(APP_PREFERENCES_COUNTER_COUNTRY, position);
                 editor.putString(APP_PREFERENCES_COUNTRY, spinner_country.getSelectedItem().toString());
                 editor.apply();
-                SpinnerCity();
+                SpinnerCity(false);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -168,7 +166,7 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
         tabHost.addTab(tabSpec);
     }
 
-    private void SpinnerCity() {
+    private void SpinnerCity(boolean bool) {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         int int_country = mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0);
         String[] data_city=null;
@@ -176,7 +174,19 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
             data_city = getResources().getStringArray(R.array.data_city_ru);
         }
         else if (int_country == 1){
-            data_city = getResources().getStringArray(R.array.data_city);
+            data_city = getResources().getStringArray(R.array.data_city_ua);
+        }
+        else if (int_country == 2){
+            data_city = getResources().getStringArray(R.array.data_city_by);
+        }
+        else if (int_country == 3){
+            data_city = getResources().getStringArray(R.array.data_city_kg);
+        }
+        else if (int_country == 4){
+            data_city = getResources().getStringArray(R.array.data_city_kz);
+        }
+        else if (int_country == 5){
+            data_city = getResources().getStringArray(R.array.data_city_md);
         }
 
 
@@ -191,7 +201,9 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
         // заголовок
         spinner_city.setPrompt("Title");
         // выделяем элемент
-        spinner_city.setSelection(mSettings.getInt(APP_PREFERENCES_COUNTER, 0));
+        int setting_counter = mSettings.getInt(APP_PREFERENCES_COUNTER, 0);
+        if (bool) {setting_counter = 0;}
+        spinner_city.setSelection(setting_counter);
         // устанавливаем обработчик нажатия
         spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

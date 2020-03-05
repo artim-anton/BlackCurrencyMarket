@@ -84,7 +84,19 @@ public class AddActivity extends AppCompatActivity {
             data_city = getResources().getStringArray(R.array.data_city_ru);
         }
         else if (int_country == 1){
-            data_city = getResources().getStringArray(R.array.data_city);
+            data_city = getResources().getStringArray(R.array.data_city_ua);
+        }
+        else if (int_country == 2){
+            data_city = getResources().getStringArray(R.array.data_city_by);
+        }
+        else if (int_country == 3){
+            data_city = getResources().getStringArray(R.array.data_city_kg);
+        }
+        else if (int_country == 4){
+            data_city = getResources().getStringArray(R.array.data_city_kz);
+        }
+        else if (int_country == 5){
+            data_city = getResources().getStringArray(R.array.data_city_md);
         }
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_city);
