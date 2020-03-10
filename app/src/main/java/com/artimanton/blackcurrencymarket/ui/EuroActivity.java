@@ -1,5 +1,7 @@
 package com.artimanton.blackcurrencymarket.ui;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +22,12 @@ import java.util.List;
 
 public class EuroActivity extends AppCompatActivity {
 
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_COUNTER = "counter";
+    public static final String APP_PREFERENCES_CITY = "city";
+    public static final String APP_PREFERENCES_COUNTRY = "country";
+    private SharedPreferences mSettings;
+
     private RecyclerView recyclerView;
     private List<RecordModel> result;
     private RecordAdapter adapter;
@@ -31,8 +39,11 @@ public class EuroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_euro);
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        String setting_city = mSettings.getString(APP_PREFERENCES_CITY, String.valueOf(0));
+        String setting_country = mSettings.getString(APP_PREFERENCES_COUNTRY, String.valueOf(0));
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Запорожская/evro");
+        reference = database.getReference(setting_country + "/" + setting_city + "/" + "evro");
 
         result = new ArrayList<>();
         recyclerView =  findViewById(R.id.record_list);

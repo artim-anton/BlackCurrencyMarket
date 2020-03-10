@@ -21,6 +21,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -41,7 +43,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class NavigationActivity extends TabActivity implements BillingProcessor.IBillingHandler, NavigationView.OnNavigationItemSelectedListener {
+public class NavigationActivity extends  TabActivity implements BillingProcessor.IBillingHandler, NavigationView.OnNavigationItemSelectedListener {
     public Spinner spinner_city,spinner_country;
     // это будет именем файла настроек
     public static final String APP_PREFERENCES = "mysettings";
@@ -68,6 +70,8 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        //setActionBar(toolbar);
         bp = new BillingProcessor(this, LICENSE_KEY, this);
         loadLocate();
         initializationDrawer();
@@ -113,13 +117,14 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 // показываем позиция нажатого элемента
-
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                boolean bool;
+                if (mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0)!=position) {bool=true;} else {bool=false;}
+                //Toast.makeText(getBaseContext(), mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0)+"Position = " + position, Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_COUNTER_COUNTRY, position);
                 editor.putString(APP_PREFERENCES_COUNTRY, spinner_country.getSelectedItem().toString());
                 editor.apply();
-                SpinnerCity(false);
+                SpinnerCity(bool);
             }
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -211,7 +216,7 @@ public class NavigationActivity extends TabActivity implements BillingProcessor.
                                        int position, long id) {
                 // показываем позиция нажатого элемента
 
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_COUNTER, position);
                 editor.putString(APP_PREFERENCES_CITY, spinner_city.getSelectedItem().toString());

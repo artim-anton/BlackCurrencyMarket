@@ -206,7 +206,7 @@ public class AddActivity extends AppCompatActivity {
                                        int position, long id) {
                 // показываем позиция нажатого элемента
 
-                Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_COUNTER_COUNTRY, position);
                 editor.putString(APP_PREFERENCES_COUNTRY, spinner_country.getSelectedItem().toString());
