@@ -239,4 +239,16 @@ public class AddActivity extends AppCompatActivity {
         reference.updateChildren(record);
         this.finish();
     }
+    public void deleteRecord(){
+        etSellBuy = spinner_sell.getSelectedItem().toString();
+        etRegion = spinner_city.getSelectedItem().toString();
+        etCountry = spinner_country.getSelectedItem().toString();
+        etCurrency = spinner_currency.getSelectedItem().toString();
+        if (etCurrency == "$") {path = "dollar";}
+        if (etCurrency == "€") {path = "evro";}
+        reference = database.getReference(etCountry+"/"+etRegion+"/"+path);
+
+        String mUserId = FirebaseAuth.getInstance().getUid();
+        reference.child(mUserId).removeValue();
+    }
 }

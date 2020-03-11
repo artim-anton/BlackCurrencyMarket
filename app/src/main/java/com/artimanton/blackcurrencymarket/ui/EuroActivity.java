@@ -39,24 +39,7 @@ public class EuroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_euro);
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        String setting_city = mSettings.getString(APP_PREFERENCES_CITY, String.valueOf(0));
-        String setting_country = mSettings.getString(APP_PREFERENCES_COUNTRY, String.valueOf(0));
-        database = FirebaseDatabase.getInstance();
-        reference = database.getReference(setting_country + "/" + setting_city + "/" + "evro");
-
-        result = new ArrayList<>();
-        recyclerView =  findViewById(R.id.record_list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        layoutManager.setReverseLayout(true);
-        layoutManager.setStackFromEnd(true);
-        recyclerView.setLayoutManager(layoutManager);
-
-        adapter = new RecordAdapter(result);
-        recyclerView.setAdapter(adapter);
-
-        updateList();
+        load_city();
 
 
     }
@@ -108,5 +91,27 @@ public class EuroActivity extends AppCompatActivity {
 
         }
         return index;
+    }
+
+    public void load_city(){
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        String setting_city = mSettings.getString(APP_PREFERENCES_CITY, String.valueOf(0));
+        String setting_country = mSettings.getString(APP_PREFERENCES_COUNTRY, String.valueOf(0));
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference(setting_country + "/" + setting_city + "/" + "evro");
+
+        result = new ArrayList<>();
+        recyclerView =  findViewById(R.id.record_list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(layoutManager);
+
+        adapter = new RecordAdapter(result);
+        recyclerView.setAdapter(adapter);
+
+        updateList();
+
     }
 }

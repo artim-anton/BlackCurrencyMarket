@@ -29,6 +29,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 import com.artimanton.blackcurrencymarket.R;
+import com.artimanton.blackcurrencymarket.model.RecordModel;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,8 +41,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class NavigationActivity extends  TabActivity implements BillingProcessor.IBillingHandler, NavigationView.OnNavigationItemSelectedListener {
     public Spinner spinner_city,spinner_country;
@@ -215,7 +218,6 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
             public void onItemSelected(AdapterView<?> parent, View view,
                                        int position, long id) {
                 // показываем позиция нажатого элемента
-
                 //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
                 SharedPreferences.Editor editor = mSettings.edit();
                 editor.putInt(APP_PREFERENCES_COUNTER, position);
@@ -229,7 +231,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     }
 
     private void authorization() {
-        /*btn_sign_out =(Button) findViewById(R.id.btn_sign_out);
+        btn_sign_out =(Button) findViewById(R.id.btn_sign_out);
         btn_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,12 +259,13 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                 });
 
             }
-        });*/
+        });
+
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
             Toast.makeText(NavigationActivity.this, "onAuthStateChanged:signed_in:" + user,Toast.LENGTH_SHORT).show();
-            //btn_sign_out.setEnabled(true);
+            btn_sign_out.setEnabled(true);
         } else {
             //Init providers
             providers = Arrays.asList(
@@ -366,6 +369,11 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                 startActivity(intent);
             }
         }
+        else if (id == R.id.delete_record){
+            AddActivity addActivity = new AddActivity();
+            addActivity.deleteRecord();
+        }
+
         else if (id == R.id.nav_logout){
 
             this.finish();
@@ -437,7 +445,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        btn_sign_out.setEnabled(false);
+                        //btn_sign_out.setEnabled(false);
                         //Init providers
                         providers = Arrays.asList(
                                 new AuthUI.IdpConfig.EmailBuilder().build(),
@@ -459,6 +467,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     }
 
     public void setting_menu(View view) {
-
+        Intent intent = new Intent(NavigationActivity.this, SettingActivity.class);
+        startActivity(intent);
     }
 }

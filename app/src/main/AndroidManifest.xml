@@ -11,10 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.SettingActivity"></activity>
         <activity
             android:name=".ui.Test"
             android:label="@string/title_activity_test"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".ui.AddActivity" />
         <activity android:name=".ui.EuroActivity" />
         <activity android:name=".ui.DollarActivity" />
