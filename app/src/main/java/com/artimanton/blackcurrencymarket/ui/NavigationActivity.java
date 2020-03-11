@@ -229,7 +229,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     }
 
     private void authorization() {
-        btn_sign_out =(Button) findViewById(R.id.btn_sign_out);
+        /*btn_sign_out =(Button) findViewById(R.id.btn_sign_out);
         btn_sign_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -257,12 +257,12 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                 });
 
             }
-        });
+        });*/
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
             Toast.makeText(NavigationActivity.this, "onAuthStateChanged:signed_in:" + user,Toast.LENGTH_SHORT).show();
-            btn_sign_out.setEnabled(true);
+            //btn_sign_out.setEnabled(true);
         } else {
             //Init providers
             providers = Arrays.asList(
@@ -420,5 +420,45 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         SharedPreferences prefs = getSharedPreferences("blackCurrencyMarketSetting", Activity.MODE_PRIVATE);
         String language = prefs.getString("My_lang", "");
         setLocate(language);
+    }
+
+    public void drawer_menu(View view) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                drawer.openDrawer(GravityCompat.START);
+            }
+    }
+
+    public void bntSignOut(View view) {
+        AuthUI.getInstance()
+                .signOut(NavigationActivity.this)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        btn_sign_out.setEnabled(false);
+                        //Init providers
+                        providers = Arrays.asList(
+                                new AuthUI.IdpConfig.EmailBuilder().build(),
+                                new AuthUI.IdpConfig.PhoneBuilder().build(),
+                                //new AuthUI.IdpConfig.FacebookBuilder().build(),
+                                new AuthUI.IdpConfig.GoogleBuilder().build()
+                        );
+                        showSingInOptions();
+                    }
+                }) .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(NavigationActivity.this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
+        drawer.closeDrawer(GravityCompat.START);
+
+    }
+
+    public void setting_menu(View view) {
+
     }
 }
