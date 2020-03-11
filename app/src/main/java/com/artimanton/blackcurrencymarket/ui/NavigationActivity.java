@@ -25,6 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.preference.PreferenceManager;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
@@ -39,6 +40,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -54,6 +57,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     public static final String APP_PREFERENCES_COUNTER_COUNTRY = "counter_country";
     public static final String APP_PREFERENCES_CITY = "city";
     public static final String APP_PREFERENCES_COUNTRY = "country";
+    public static final String APP_PREFERENCES_PATH = "path";
     private SharedPreferences mSettings;
     TabHost tabHost;
     TabHost.TabSpec tabSpec;
@@ -370,8 +374,13 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
             }
         }
         else if (id == R.id.delete_record){
-            AddActivity addActivity = new AddActivity();
-            addActivity.deleteRecord();
+            mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+            FirebaseDatabase database = FirebaseDatabase.getInstance();;
+            DatabaseReference reference;
+            reference = database.getReference(mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT"));
+            String mUserId = FirebaseAuth.getInstance().getUid();
+            reference.child(mUserId).removeValue();
+            Toast.makeText(this, ""+mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT"), Toast.LENGTH_LONG).show();
         }
 
         else if (id == R.id.nav_logout){
@@ -469,5 +478,11 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     public void setting_menu(View view) {
         Intent intent = new Intent(NavigationActivity.this, SettingActivity.class);
         startActivity(intent);
+    }
+
+    public void btnReload(View view) {
+        Intent i = new Intent( this , this.getClass() );
+        finish();
+        this.startActivity(i);
     }
 }

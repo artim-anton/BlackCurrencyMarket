@@ -40,6 +40,7 @@ public class AddActivity extends AppCompatActivity {
     public static final String APP_PREFERENCES_COUNTER = "counter";
     public static final String APP_PREFERENCES_COUNTER_COUNTRY = "counter_country";
     public static final String APP_PREFERENCES_COUNTRY = "country";
+    public static final String APP_PREFERENCES_PATH = "path";
     private SharedPreferences mSettings;
 
 
@@ -227,6 +228,9 @@ public class AddActivity extends AppCompatActivity {
         if (etCurrency == "$") {path = "dollar";}
         if (etCurrency == "€") {path = "evro";}
         reference = database.getReference(etCountry+"/"+etRegion+"/"+path);
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_PATH, etCountry+"/"+etRegion+"/"+path);
+        editor.commit();
 
         String mUserId = FirebaseAuth.getInstance().getUid();
         //String id = reference.push().getKey();
@@ -240,14 +244,7 @@ public class AddActivity extends AppCompatActivity {
         this.finish();
     }
     public void deleteRecord(){
-        etSellBuy = spinner_sell.getSelectedItem().toString();
-        etRegion = spinner_city.getSelectedItem().toString();
-        etCountry = spinner_country.getSelectedItem().toString();
-        etCurrency = spinner_currency.getSelectedItem().toString();
-        if (etCurrency == "$") {path = "dollar";}
-        if (etCurrency == "€") {path = "evro";}
         reference = database.getReference(etCountry+"/"+etRegion+"/"+path);
-
         String mUserId = FirebaseAuth.getInstance().getUid();
         reference.child(mUserId).removeValue();
     }
