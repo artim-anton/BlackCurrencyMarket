@@ -170,7 +170,7 @@
     <string name="billing_text">Функция добавления объявления платная. Оформите подписку, чтобы иметь возможность размещать объявления. Стоимость 30 грн/мес. Первые 3 дня бесплатно.</string>
     <string name="subscribe_text">Оформить подписку на 1 месяц</string>
     <string name="new_record">Новая/изменить заявку</string>
-    <string name="delete_record">Удалить заявку</string>
+    <string name="delete_record">Удалить заявки</string>
     <string name="title_activity_settings">Settings</string>
 
     <!-- Preference Titles -->

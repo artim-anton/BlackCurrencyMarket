@@ -42,7 +42,7 @@
             android:background="@color/colorPrimary"
             android:layout_gravity="center"
             android:layout_marginRight="8dp"
-            android:text="Обновить"
+            android:text="Обновить регион"
             android:textColor="#FFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

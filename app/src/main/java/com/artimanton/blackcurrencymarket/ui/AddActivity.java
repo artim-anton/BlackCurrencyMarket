@@ -240,6 +240,8 @@ public class AddActivity extends AppCompatActivity {
 
         Map<String, Object> advertValue = newAdvert.toMap();
         Map<String, Object> record = new HashMap<>();
+        if (etSellBuy == "КУПЛЮ") {mUserId += "buy";}
+        if (etSellBuy == "ПРОДАМ") {mUserId += "sell";}
         reference.child(mUserId).removeValue();
         record.put(mUserId, advertValue);
         reference.updateChildren(record);

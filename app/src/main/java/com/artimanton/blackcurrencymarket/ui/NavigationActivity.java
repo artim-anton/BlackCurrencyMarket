@@ -421,7 +421,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     }
 
     private void showDeleteCurrencyDialog() {
-        final String[] listItem = {"доллар", "евро", "рубль"};
+        final String[] listItem = {"доллары", "евро", "рубли"};
         AlertDialog.Builder mBilder = new AlertDialog.Builder(NavigationActivity.this);
         mBilder.setTitle(getString(R.string.choose_currency));
         mBilder.setSingleChoiceItems(listItem, -1, new DialogInterface.OnClickListener() {
@@ -434,7 +434,8 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                     String s = mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT") + "dollar";
                     reference = database.getReference(s);
                     String mUserId = FirebaseAuth.getInstance().getUid();
-                    reference.child(mUserId).removeValue();
+                    reference.child(mUserId+"buy").removeValue();
+                    reference.child(mUserId+"sell").removeValue();
                     Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
                 }
                 else if (i == 1){
