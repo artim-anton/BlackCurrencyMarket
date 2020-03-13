@@ -3,6 +3,7 @@ package com.artimanton.blackcurrencymarket.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.artimanton.blackcurrencymarket.R;
 
@@ -14,5 +15,9 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
 
+    }
+
+    public void backBtn(View view) {
+        finish();
     }
 }
