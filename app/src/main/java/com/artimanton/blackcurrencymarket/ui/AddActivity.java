@@ -40,6 +40,7 @@ public class AddActivity extends AppCompatActivity {
     public static final String APP_PREFERENCES_COUNTER = "counter";
     public static final String APP_PREFERENCES_COUNTER_COUNTRY = "counter_country";
     public static final String APP_PREFERENCES_COUNTRY = "country";
+    public static final String APP_PREFERENCES_CURRENCY = "currency";
     public static final String APP_PREFERENCES_PATH = "path";
     private SharedPreferences mSettings;
 
@@ -141,7 +142,7 @@ public class AddActivity extends AppCompatActivity {
         // заголовок
         spinner_currency.setPrompt("Title");
         // выделяем элемент
-        spinner_currency.setSelection(0);
+        spinner_currency.setSelection(mSettings.getInt(APP_PREFERENCES_CURRENCY, 0));
         // устанавливаем обработчик нажатия
         spinner_currency.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

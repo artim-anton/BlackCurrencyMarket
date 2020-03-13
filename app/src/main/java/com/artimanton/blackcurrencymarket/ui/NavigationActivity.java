@@ -57,6 +57,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     public static final String APP_PREFERENCES_COUNTER_COUNTRY = "counter_country";
     public static final String APP_PREFERENCES_CITY = "city";
     public static final String APP_PREFERENCES_COUNTRY = "country";
+    public static final String APP_PREFERENCES_CURRENCY = "currency";
     public static final String APP_PREFERENCES_PATH = "path";
     private SharedPreferences mSettings;
     TabHost tabHost;
@@ -88,6 +89,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         floatingActionButton();
         ///АВТОРИЗАЦИЯ
         authorization();
+
 
         /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View headerview = navigationView.getHeaderView(0);
@@ -176,6 +178,25 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         tabSpec.setIndicator("Евро");
         tabSpec.setContent(new Intent(this, EuroActivity.class));
         tabHost.addTab(tabSpec);
+        final SharedPreferences.Editor editor = mSettings.edit();
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                switch (tabId){
+                    case "tag1":
+                        //Toast.makeText(getBaseContext(), "tag1", Toast.LENGTH_SHORT).show();
+                        editor.putInt(APP_PREFERENCES_CURRENCY, 0);
+                        editor.apply();
+                    break;
+                    case "tag2":
+                        //Toast.makeText(getBaseContext(), "tag2", Toast.LENGTH_SHORT).show();
+                        editor.putInt(APP_PREFERENCES_CURRENCY, 1);
+                        editor.apply();
+                    break;
+                }
+            }
+        });
+
     }
 
     private void SpinnerCity(boolean bool) {
