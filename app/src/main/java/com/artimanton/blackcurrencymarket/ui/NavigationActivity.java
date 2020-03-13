@@ -178,6 +178,12 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         tabSpec.setIndicator("Евро");
         tabSpec.setContent(new Intent(this, EuroActivity.class));
         tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tag3");
+        tabSpec.setIndicator("Рубли");
+        tabSpec.setContent(new Intent(this, RubleActivity.class));
+        tabHost.addTab(tabSpec);
+
         final SharedPreferences.Editor editor = mSettings.edit();
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -193,6 +199,11 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                         editor.putInt(APP_PREFERENCES_CURRENCY, 1);
                         editor.apply();
                     break;
+                    case "tag3":
+                        //Toast.makeText(getBaseContext(), "tag2", Toast.LENGTH_SHORT).show();
+                        editor.putInt(APP_PREFERENCES_CURRENCY, 2);
+                        editor.apply();
+                        break;
                 }
             }
         });
@@ -395,12 +406,8 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
             }
         }
         else if (id == R.id.delete_record){
-            mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-            FirebaseDatabase database = FirebaseDatabase.getInstance();;
-            DatabaseReference reference;
-            reference = database.getReference(mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT"));
-            String mUserId = FirebaseAuth.getInstance().getUid();
-            reference.child(mUserId).removeValue();
+            showDeleteCurrencyDialog();
+
             Toast.makeText(this, ""+mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT"), Toast.LENGTH_LONG).show();
         }
 
@@ -411,6 +418,51 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showDeleteCurrencyDialog() {
+        final String[] listItem = {"доллар", "евро", "рубль"};
+        AlertDialog.Builder mBilder = new AlertDialog.Builder(NavigationActivity.this);
+        mBilder.setTitle(getString(R.string.choose_currency));
+        mBilder.setSingleChoiceItems(listItem, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                if (i == 0){
+                    mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();;
+                    DatabaseReference reference;
+                    String s = mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT") + "dollar";
+                    reference = database.getReference(s);
+                    String mUserId = FirebaseAuth.getInstance().getUid();
+                    reference.child(mUserId).removeValue();
+                    Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
+                }
+                else if (i == 1){
+                    mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();;
+                    DatabaseReference reference;
+                    String s = mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT") + "evro";
+                    reference = database.getReference(s);
+                    String mUserId = FirebaseAuth.getInstance().getUid();
+                    reference.child(mUserId).removeValue();
+                    Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
+                }
+                else if (i == 2){
+                    mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();;
+                    DatabaseReference reference;
+                    String s = mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT") + "ruble";
+                    reference = database.getReference(s);
+                    String mUserId = FirebaseAuth.getInstance().getUid();
+                    reference.child(mUserId).removeValue();
+                    Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
+                }
+                dialog.dismiss();
+            }
+        });
+        AlertDialog mDialog = mBilder.create();
+        mDialog.show();
+
     }
 
     private void showChangeLanguageDialog() {

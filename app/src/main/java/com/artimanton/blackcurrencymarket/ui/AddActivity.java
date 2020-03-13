@@ -228,9 +228,10 @@ public class AddActivity extends AppCompatActivity {
         etCurrency = spinner_currency.getSelectedItem().toString();
         if (etCurrency == "$") {path = "dollar";}
         if (etCurrency == "€") {path = "evro";}
+        if (etCurrency == "₽") {path = "ruble";}
         reference = database.getReference(etCountry+"/"+etRegion+"/"+path);
         SharedPreferences.Editor editor = mSettings.edit();
-        editor.putString(APP_PREFERENCES_PATH, etCountry+"/"+etRegion+"/"+path);
+        editor.putString(APP_PREFERENCES_PATH, etCountry+"/"+etRegion+"/");
         editor.commit();
 
         String mUserId = FirebaseAuth.getInstance().getUid();
