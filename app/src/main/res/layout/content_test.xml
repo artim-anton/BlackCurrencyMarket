@@ -64,20 +64,6 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <Spinner
-        android:id="@+id/spinner_country"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
-
-    <Spinner
-        android:id="@+id/spinner_city"
-        android:layout_gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </Spinner>
-
     <TabHost
         android:id="@android:id/tabhost"
         android:layout_width="match_parent"

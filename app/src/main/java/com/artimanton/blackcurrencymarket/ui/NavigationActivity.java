@@ -42,6 +42,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -83,8 +85,6 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         bp = new BillingProcessor(this, LICENSE_KEY, this);
         loadLocate();
         initializationDrawer();
-        SpinnerCity(false);
-        SpinnerCountry();
         initializationTabHost();
         floatingActionButton();
         ///АВТОРИЗАЦИЯ
@@ -105,41 +105,6 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
 
     }
 
-    private void SpinnerCountry() {
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        final String[] data_country = getResources().getStringArray(
-                R.array.data_country);
-        // адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_country);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-        spinner_country = (Spinner) findViewById(R.id.spinner_country);
-        spinner_country.setAdapter(adapter);
-        // заголовок
-        spinner_country.setPrompt("Title");
-        // выделяем элемент
-        spinner_country.setSelection(mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0));
-        // устанавливаем обработчик нажатия
-        spinner_country.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                // показываем позиция нажатого элемента
-                boolean bool;
-                if (mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0)!=position) {bool=true;} else {bool=false;}
-                //Toast.makeText(getBaseContext(), mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0)+"Position = " + position, Toast.LENGTH_SHORT).show();
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putInt(APP_PREFERENCES_COUNTER_COUNTRY, position);
-                editor.putString(APP_PREFERENCES_COUNTRY, spinner_country.getSelectedItem().toString());
-                editor.apply();
-                SpinnerCity(bool);
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
-    }
 
     private void floatingActionButton() {
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -184,6 +149,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         tabSpec.setContent(new Intent(this, RubleActivity.class));
         tabHost.addTab(tabSpec);
 
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = mSettings.edit();
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -208,62 +174,6 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
             }
         });
 
-    }
-
-    private void SpinnerCity(boolean bool) {
-        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
-        int int_country = mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0);
-        String[] data_city=null;
-        if (int_country == 0){
-            data_city = getResources().getStringArray(R.array.data_city_ru);
-        }
-        else if (int_country == 1){
-            data_city = getResources().getStringArray(R.array.data_city_ua);
-        }
-        else if (int_country == 2){
-            data_city = getResources().getStringArray(R.array.data_city_by);
-        }
-        else if (int_country == 3){
-            data_city = getResources().getStringArray(R.array.data_city_kg);
-        }
-        else if (int_country == 4){
-            data_city = getResources().getStringArray(R.array.data_city_kz);
-        }
-        else if (int_country == 5){
-            data_city = getResources().getStringArray(R.array.data_city_md);
-        }
-
-
-
-        // адаптер
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_city);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-
-        spinner_city = (Spinner) findViewById(R.id.spinner_city);
-        spinner_city.setAdapter(adapter);
-        // заголовок
-        spinner_city.setPrompt("Title");
-        // выделяем элемент
-        int setting_counter = mSettings.getInt(APP_PREFERENCES_COUNTER, 0);
-        if (bool) {setting_counter = 0;}
-        spinner_city.setSelection(setting_counter);
-        // устанавливаем обработчик нажатия
-        spinner_city.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                // показываем позиция нажатого элемента
-                //Toast.makeText(getBaseContext(), "Position = " + position, Toast.LENGTH_SHORT).show();
-                SharedPreferences.Editor editor = mSettings.edit();
-                editor.putInt(APP_PREFERENCES_COUNTER, position);
-                editor.putString(APP_PREFERENCES_CITY, spinner_city.getSelectedItem().toString());
-                editor.apply();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> arg0) {
-            }
-        });
     }
 
     private void authorization() {
@@ -514,6 +424,8 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     }
 
     public void drawer_menu(View view) {
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        view.startAnimation(animAlpha);
             DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawerLayout);
             if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawer(GravityCompat.START);
@@ -550,8 +462,11 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     }
 
     public void setting_menu(View view) {
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        view.startAnimation(animAlpha);
         Intent intent = new Intent(NavigationActivity.this, SettingActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void btnReload(View view) {
