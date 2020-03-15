@@ -1,24 +1,19 @@
 <resources>
-    <string name="app_name">BlackCurrencyMarket</string>
+    <string name="app_name">Чёрный рынок валют</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="facebook_application_id">2535574336678330</string>
-    <string name="text_activity1">Это первое Activity</string>
-    <string name="text_activity2">Это второе Activity</string>
-    <string name="title_activity_test">Test</string>
     <string name="nav_setting">Сменить язык</string>
     <string name="nav_logout">Выйти</string>
-    <string name="choose_language">Choose language...</string>
+    <string name="choose_language">Выберете язык...</string>
     <string name="choose_currency">Выберете валюту...</string>
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
     <string-array name="screen_array">
         <item>Screen 1</item>
         <item>Screen 2</item>
         <item>Screen 3</item>
     </string-array>
-    <string-array name="data_country">
-        <item>Россия</item>
+    <string-array name="data_country_ru">
         <item>Украина</item>
+        <item>Россия</item>
         <item>Беларусь</item>
         <item>Киргизия</item>
         <item>Казахстан</item>
@@ -165,27 +160,14 @@
         <item>Яловенский</item>
         <item>Автономное территориальное образование Гагаузия</item>
         <item>Административно-территориальные единицы Левобережья Днестра</item>
-
     </string-array>
     <string name="billing_text">Функция добавления объявления платная. Оформите подписку, чтобы иметь возможность размещать объявления. Стоимость 30 грн/мес. Первые 3 дня бесплатно.</string>
     <string name="subscribe_text">Оформить подписку на 1 месяц</string>
     <string name="new_record">Новая/изменить заявку</string>
     <string name="delete_record">Удалить заявки</string>
-    <string name="title_activity_settings">Settings</string>
-
-    <!-- Preference Titles -->
-    <string name="messages_header">Messages</string>
-    <string name="sync_header">Sync</string>
-
-    <!-- Messages Preferences -->
-    <string name="signature_title">Your signature</string>
-    <string name="reply_title">Default reply action</string>
-
-    <!-- Sync Preferences -->
-    <string name="sync_title">Sync email periodically</string>
-    <string name="attachment_title">Download incoming attachments</string>
-    <string name="attachment_summary_on">Automatically download attachments for incoming emails
-    </string>
-    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="title_activity_settings">Настройки</string>
     <string name="apply">Применить</string>
+    <string name="dollar">Доллары</string>
+    <string name="euro">Евро</string>
+    <string name="ruble">Рубли</string>
 </resources>

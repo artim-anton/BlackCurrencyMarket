@@ -189,7 +189,8 @@ public class AddActivity extends AppCompatActivity {
     private void SpinnerCountry() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         final String[] data_country = getResources().getStringArray(
-                R.array.data_country);
+                R.array.data_country_ru);
+
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_country);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

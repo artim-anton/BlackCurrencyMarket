@@ -46,10 +46,10 @@ public class SettingActivity extends AppCompatActivity {
         int int_country = mSettings.getInt(APP_PREFERENCES_COUNTER_COUNTRY, 0);
         String[] data_city=null;
         if (int_country == 0){
-            data_city = getResources().getStringArray(R.array.data_city_ru);
+            data_city = getResources().getStringArray(R.array.data_city_ua);
         }
         else if (int_country == 1){
-            data_city = getResources().getStringArray(R.array.data_city_ua);
+            data_city = getResources().getStringArray(R.array.data_city_ru);
         }
         else if (int_country == 2){
             data_city = getResources().getStringArray(R.array.data_city_by);
@@ -100,7 +100,7 @@ public class SettingActivity extends AppCompatActivity {
     public void SpinnerCountry() {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
         final String[] data_country = getResources().getStringArray(
-                R.array.data_country);
+                R.array.data_country_ru);
         // адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, data_country);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

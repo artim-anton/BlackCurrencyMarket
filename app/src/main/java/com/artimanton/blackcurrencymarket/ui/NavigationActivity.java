@@ -135,17 +135,17 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
 
 
         tabSpec = tabHost.newTabSpec("tag1");
-        tabSpec.setIndicator("Доллары");
+        tabSpec.setIndicator(getString(R.string.dollar));
         tabSpec.setContent(new Intent(this, DollarActivity.class));
         tabHost.addTab(tabSpec);
 
         tabSpec = tabHost.newTabSpec("tag2");
-        tabSpec.setIndicator("Евро");
+        tabSpec.setIndicator(getString(R.string.euro));
         tabSpec.setContent(new Intent(this, EuroActivity.class));
         tabHost.addTab(tabSpec);
 
         tabSpec = tabHost.newTabSpec("tag3");
-        tabSpec.setIndicator("Рубли");
+        tabSpec.setIndicator(getString(R.string.ruble));
         tabSpec.setContent(new Intent(this, RubleActivity.class));
         tabHost.addTab(tabSpec);
 
@@ -302,10 +302,9 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_setting) {
-            showChangeLanguageDialog();
+        /*if (id == R.id.nav_setting) {showChangeLanguageDialog();
 
-        } else if (id == R.id.new_record){
+        } else*/ if (id == R.id.new_record){
 
             if (bp.isSubscribed(SUBSCRIPTION_ID)) {
                 Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
