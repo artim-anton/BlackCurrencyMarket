@@ -355,7 +355,8 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                     String s = mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT") + "evro";
                     reference = database.getReference(s);
                     String mUserId = FirebaseAuth.getInstance().getUid();
-                    reference.child(mUserId).removeValue();
+                    reference.child(mUserId+"buy").removeValue();
+                    reference.child(mUserId+"sell").removeValue();
                     Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
                 }
                 else if (i == 2){
@@ -365,7 +366,8 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                     String s = mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT") + "ruble";
                     reference = database.getReference(s);
                     String mUserId = FirebaseAuth.getInstance().getUid();
-                    reference.child(mUserId).removeValue();
+                    reference.child(mUserId+"buy").removeValue();
+                    reference.child(mUserId+"sell").removeValue();
                     Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
                 }
                 dialog.dismiss();
