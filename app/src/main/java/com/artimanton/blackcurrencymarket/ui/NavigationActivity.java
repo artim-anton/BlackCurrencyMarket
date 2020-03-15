@@ -466,7 +466,6 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         view.startAnimation(animAlpha);
         Intent intent = new Intent(NavigationActivity.this, SettingActivity.class);
         startActivity(intent);
-        finish();
     }
 
     public void btnReload(View view) {
