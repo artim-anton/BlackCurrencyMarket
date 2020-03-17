@@ -68,8 +68,8 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
 
     private BillingProcessor bp;
     private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwSzeEgAXyQBBKCp724PVqTDbIzY9CGhkTdXFrPNmxpwmLjUyHB9oR3rlkOQIbCPRgU1nWaWqD27qhijbnx1dm3sNZ136EnB2tzbMZjTU88p9Meizz8YfkAhD0csKiEzYk7tzbhO9EWfIprDylbD6UpJsa8OJS//8xQHykcgt2r/DKICxoRoR3hxNczgQY9dtJOPcdrMwKKB402lkqqdEAEyN1t5E0vxBQpqU6Ouufjx3aUrI12GovTnn1kOyT4UUYt20UQz9E9M9GRaBoHgxPstZB8rY6ffkkqaKmmmqjFM5g8hY9OxNF8jkApcjgAtvq03t4j6YOiFUetI+4yc5wIDAQAB"; // PUT YOUR MERCHANT KEY HERE;
-    private static final String PRODUCT_ID = "com.artimanton.infovesele";
-    private static final String SUBSCRIPTION_ID = "com.artimanton.infovesele.subs1";
+    private static final String PRODUCT_ID = "com.artimanton.blackcurrencymarket";
+    private static final String SUBSCRIPTION_ID = "com.artimanton.blackcurrencymarket.subs1";
     //авторизацыя
     private static final int MY_REQUEST_CODE = 7117;
     List<AuthUI.IdpConfig> providers;
@@ -83,7 +83,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         Toolbar toolbar = findViewById(R.id.toolbar);
         //setActionBar(toolbar);
         bp = new BillingProcessor(this, LICENSE_KEY, this);
-        loadLocate();
+        //loadLocate();
         initializationDrawer();
         initializationTabHost();
         floatingActionButton();
@@ -210,7 +210,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             // User is signed in
-            Toast.makeText(NavigationActivity.this, "onAuthStateChanged:signed_in:" + user,Toast.LENGTH_SHORT).show();
+            //Toast.makeText(NavigationActivity.this, "onAuthStateChanged:signed_in:" + user,Toast.LENGTH_SHORT).show();
             btn_sign_out.setEnabled(true);
         } else {
             //Init providers
@@ -222,7 +222,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
             );
             showSingInOptions();
             // User is signed out
-            Toast.makeText(NavigationActivity.this, "onAuthStateChanged:signed_out",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(NavigationActivity.this, "onAuthStateChanged:signed_out",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -310,7 +310,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                 Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
                 startActivity(intent);
             }else{
-                Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, BillingActivity.class);
                 startActivity(intent);
             }
         }
@@ -377,7 +377,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
 
     }
 
-    private void showChangeLanguageDialog() {
+    /*private void showChangeLanguageDialog() {
         final String[] listItem = {"Русский", "Українська", "Polski", "English"};
         AlertDialog.Builder mBilder = new AlertDialog.Builder(NavigationActivity.this);
         mBilder.setTitle(getString(R.string.choose_language));
@@ -422,7 +422,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         SharedPreferences prefs = getSharedPreferences("blackCurrencyMarketSetting", Activity.MODE_PRIVATE);
         String language = prefs.getString("My_lang", "");
         setLocate(language);
-    }
+    }*/
 
     public void drawer_menu(View view) {
         final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.alpha);
