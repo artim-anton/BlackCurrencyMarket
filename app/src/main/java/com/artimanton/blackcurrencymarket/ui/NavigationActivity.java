@@ -310,7 +310,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                 Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
                 startActivity(intent);
             }else{
-                Intent intent = new Intent(NavigationActivity.this, BillingActivity.class);
+                Intent intent = new Intent(NavigationActivity.this, AddActivity.class);
                 startActivity(intent);
             }
         }
