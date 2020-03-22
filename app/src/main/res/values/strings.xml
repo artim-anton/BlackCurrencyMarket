@@ -170,4 +170,5 @@
     <string name="dollar">Доллары</string>
     <string name="euro">Евро</string>
     <string name="ruble">Рубли</string>
+    <string name="crown">Кроны</string>
 </resources>

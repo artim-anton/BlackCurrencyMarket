@@ -173,10 +173,10 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                         editor.apply();
                     break;
                     case "tag3":
-                        //Toast.makeText(getBaseContext(), "tag2", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getBaseContext(), "tag3", Toast.LENGTH_SHORT).show();
                         editor.putInt(APP_PREFERENCES_CURRENCY, 2);
                         editor.apply();
-                        break;
+                    break;
                 }
             }
         });
@@ -207,7 +207,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                         }) .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(NavigationActivity.this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(NavigationActivity.this, ""+e.getMessage(),Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -288,7 +288,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                 //Get User
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 //Show email in Toast
-                Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_LONG).show();
                 //Set button sign_out
                 btn_sign_out.setEnabled(true);
             }
@@ -474,6 +474,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         view.startAnimation(animAlpha);
         Intent intent = new Intent(NavigationActivity.this, SettingActivity.class);
         startActivity(intent);
+        this.finish();
     }
 
     public void btnReload(View view) {
