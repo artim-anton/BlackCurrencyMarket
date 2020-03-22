@@ -16,6 +16,7 @@ import com.artimanton.blackcurrencymarket.R;
 public class SettingActivity extends AppCompatActivity {
     private SharedPreferences mSettings;
     public Spinner spinner_city,spinner_country;
+    public String etSellBuy, etRegion, etCountry, etCurrency, path;
     // это будет именем файла настроек
     public static final String APP_PREFERENCES = "mysettings";
     public static final String APP_PREFERENCES_COUNTER = "counter";
@@ -134,6 +135,11 @@ public class SettingActivity extends AppCompatActivity {
     }
 
     public void apllyBtn(View view) {
+        etRegion = spinner_city.getSelectedItem().toString();
+        etCountry = spinner_country.getSelectedItem().toString();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putString(APP_PREFERENCES_PATH, etCountry+"/"+etRegion+"/");
+        editor.commit();
         Intent intent = new Intent(SettingActivity.this, NavigationActivity.class);
         startActivity(intent);
         finish();

@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TabHost;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -67,7 +68,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
     DollarActivity dollarActivity;
 
     private BillingProcessor bp;
-    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjwSzeEgAXyQBBKCp724PVqTDbIzY9CGhkTdXFrPNmxpwmLjUyHB9oR3rlkOQIbCPRgU1nWaWqD27qhijbnx1dm3sNZ136EnB2tzbMZjTU88p9Meizz8YfkAhD0csKiEzYk7tzbhO9EWfIprDylbD6UpJsa8OJS//8xQHykcgt2r/DKICxoRoR3hxNczgQY9dtJOPcdrMwKKB402lkqqdEAEyN1t5E0vxBQpqU6Ouufjx3aUrI12GovTnn1kOyT4UUYt20UQz9E9M9GRaBoHgxPstZB8rY6ffkkqaKmmmqjFM5g8hY9OxNF8jkApcjgAtvq03t4j6YOiFUetI+4yc5wIDAQAB"; // PUT YOUR MERCHANT KEY HERE;
+    private static final String LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqgQzJ4YzgtDk/XHtXn21pKRY9isudlOSXtdwrauOl4aAFSVV7LvPUpVMvZ9T6Wi5fu+cDZfV96uwDr99ELuM+uuv9QMTL5EdzUATrA4x/1rwMoaxdPbkQfEqI4Rj/4nsVQCihZqtlqT6hmlYEmWSZUG/xQbfQqa8bGJi5gMGv4sZ/sKiI5eqP5xdB8h8s+cTgLSazMHjnFWyP0qfkK5az5+PIjvbB7Lf8mjOmaPnsL7pyfQ00k95JEUboTyv02pc0uDOz30pZ4C+ic7/OYhoxFiXL4zCJTzpiH9ofiY0HEnlETo1tkSskhEFpN6ixegYFDdvJx0WuhghZf7U4ZTWcQIDAQAB"; // PUT YOUR MERCHANT KEY HERE;
     private static final String PRODUCT_ID = "com.artimanton.blackcurrencymarket";
     private static final String SUBSCRIPTION_ID = "com.artimanton.blackcurrencymarket.subs1";
     //авторизацыя
@@ -89,6 +90,12 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         floatingActionButton();
         ///АВТОРИЗАЦИЯ
         authorization();
+
+
+        TextView txtRegion = (TextView) findViewById(R.id.txt_region);
+        SharedPreferences mSettingRegion = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+        String region = mSettingRegion.getString(APP_PREFERENCES_PATH,"Украина/Винницкая/");
+        txtRegion.setText(region);
 
 
         /*NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -317,7 +324,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
         else if (id == R.id.delete_record){
             showDeleteCurrencyDialog();
 
-            Toast.makeText(this, ""+mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT"), Toast.LENGTH_LONG).show();
+           // Toast.makeText(this, ""+mSettings.getString(APP_PREFERENCES_PATH,"DEFAULT"), Toast.LENGTH_LONG).show();
         }
 
         else if (id == R.id.nav_logout){
@@ -345,7 +352,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                     String mUserId = FirebaseAuth.getInstance().getUid();
                     reference.child(mUserId+"buy").removeValue();
                     reference.child(mUserId+"sell").removeValue();
-                    Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
+                    Toast.makeText(NavigationActivity.this, "Ваши заявки удалены", Toast.LENGTH_LONG).show();
                 }
                 else if (i == 1){
                     mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -356,7 +363,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                     String mUserId = FirebaseAuth.getInstance().getUid();
                     reference.child(mUserId+"buy").removeValue();
                     reference.child(mUserId+"sell").removeValue();
-                    Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
+                    Toast.makeText(NavigationActivity.this, "Ваши заявки удалены", Toast.LENGTH_LONG).show();
                 }
                 else if (i == 2){
                     mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
@@ -367,7 +374,7 @@ public class NavigationActivity extends  TabActivity implements BillingProcessor
                     String mUserId = FirebaseAuth.getInstance().getUid();
                     reference.child(mUserId+"buy").removeValue();
                     reference.child(mUserId+"sell").removeValue();
-                    Toast.makeText(NavigationActivity.this, s, Toast.LENGTH_LONG).show();
+                    Toast.makeText(NavigationActivity.this, "Ваши заявки удалены", Toast.LENGTH_LONG).show();
                 }
                 dialog.dismiss();
             }
